@@ -9,7 +9,7 @@ elif [ $1 != "dev" ] && [ $1 != "prod" ]; then
 else
     cd /var/lib/jenkins/workspace/gigi
 
-    ./gradlew bootJar
+    sudo ./gradlew bootJar
 
     cd ./build/libs
 
