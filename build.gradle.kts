@@ -30,6 +30,7 @@ dependencies {
 
 	//jsp
 	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
+	implementation("javax.servlet:jstl")
 
 }
 
