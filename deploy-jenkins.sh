@@ -13,8 +13,8 @@ else
 
     cd ./build/libs
 
-    scp -i ../../key/gigi.pem book-app.jar ubuntu@158.180.68.72:/home/ubuntu/gigi/
-    ssh -i ../../key/gigi.pem -t ubuntu@158.180.68.72 -T "cd /home/ubuntu/gigi ; bash" "./deploy.sh gigi.jar $1"
+    scp -i ../../key/gigi.pem gigi.jar ubuntu@158.180.68.72:/home/ubuntu/gigi/
+    ssh -i ../../key/gigi.pem -t ubuntu@158.180.68.72 -T "cd /home/ubuntu/gigi ; bash" "./gigi-start.sh gigi.jar $1"
 
     cd ../..
 fi
