@@ -1,3 +1,11 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+
+tasks.getByName<BootJar>("bootJar") {
+	enabled = true
+	archiveBaseName.set("gigi")
+}
+
 plugins {
 	java
 	id("org.springframework.boot") version "2.7.12"
@@ -5,8 +13,8 @@ plugins {
 }
 
 group = "com.ujo"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
+
 
 repositories {
 	mavenCentral()
