@@ -18,9 +18,11 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.batch:spring-batch-test")
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0")
 
 	//jsp
 	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
+
 }
 
 tasks.withType<Test> {
