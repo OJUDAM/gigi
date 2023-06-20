@@ -9,12 +9,12 @@ elif [ $1 != "dev" ] && [ $1 != "prod" ]; then
 else
     cd /var/lib/jenkins/workspace/gigi
 
-    sudo ./gradlew bootJar
+    sudo ./gradlew bootWar
 
     cd ./build/libs
 
-    sudo scp -i ../../key/gigi.pem gigi.jar ubuntu@158.180.68.72:/home/ubuntu/gigi/
-    sudo ssh -i ../../key/gigi.pem -t ubuntu@158.180.68.72 -T "cd /home/ubuntu/gigi ; bash;" "sudo ./gigi-start.sh gigi.jar $1"
+    sudo scp -i ../../key/gigi.pem gigi.war ubuntu@158.180.68.72:/home/ubuntu/gigi/
+    sudo ssh -i ../../key/gigi.pem -t ubuntu@158.180.68.72 -T "cd /home/ubuntu/gigi ; bash;" "sudo ./gigi-start.sh gigi.war $1"
 
     cd ../..
 fi

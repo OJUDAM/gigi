@@ -1,7 +1,13 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.bundling.BootWar
 
 
 tasks.getByName<BootJar>("bootJar") {
+	enabled = true
+	archiveBaseName.set("gigi")
+}
+
+tasks.getByName<BootWar>("bootWar") {
 	enabled = true
 	archiveBaseName.set("gigi")
 }
@@ -10,6 +16,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "2.7.12"
 	id("io.spring.dependency-management") version "1.1.0"
+	war
 }
 
 group = "com.ujo"
