@@ -1,4 +1,4 @@
-package com.ujo.test.util;
+package com.ujo.test.utils;
 
 public class StcisUtil {
 }

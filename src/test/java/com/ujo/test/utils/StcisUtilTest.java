@@ -1,14 +1,11 @@
-package com.ujo.test.util;
+package com.ujo.test.utils;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StcisUtilTest {
 
