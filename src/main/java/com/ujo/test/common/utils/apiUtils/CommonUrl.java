@@ -35,8 +35,11 @@ public class CommonUrl {
         }
 
         public UrlBuilder setQueryStringParam(String key, String value) {
-            this.url += "&"+key + "=" + value;
+            if (StringUtils.isEmpty(value)) {
+                return this;
+            }
 
+            this.url += "&"+key + "=" + value;
             return this;
         }
 

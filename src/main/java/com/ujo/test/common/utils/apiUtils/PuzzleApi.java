@@ -29,11 +29,11 @@ public class PuzzleApi {
                 .callApi();
     }
 
-    public String callStaticsApi(String station, String dow, String hour){
+    public String callStaticsApi(String station, String hour , String dow){
         CommonUrl url = new CommonUrl.UrlBuilder(puzzleStatisticsUrl)
                 .setPathParam(station)
-                .startQueryStringParam("dow", dow)
-                .setQueryStringParam("hh", hour)
+                .startQueryStringParam("hh", hour)
+                .setQueryStringParam("dow", dow)
                 .build();
 
         return requestPuzzleApi(url.getUrl(), "지하철 혼잡도 통계");

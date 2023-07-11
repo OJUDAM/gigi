@@ -1,7 +1,8 @@
 package com.ujo.test.batch.job;
 
-import com.ujo.test.batch.entity.StationEntity;
-import com.ujo.test.batch.entity.StationMapper;
+import com.ujo.test.batch.entity.*;
+import com.ujo.test.batch.repository.RequestStatRepository;
+import com.ujo.test.batch.repository.StatRepository;
 import com.ujo.test.batch.repository.StationRepository;
 import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.common.utils.apiUtils.PuzzleApi;
@@ -16,6 +17,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,36 +34,45 @@ public class StatJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final PuzzleApi puzzleApi;
-    private final StationMapper stationMapper;
+    private final StatMapper statMapper;
+    private final RequestStatRepository requestStatRepository;
 
     @Autowired
     public SqlSessionFactory sqlSessionFactory;
 
     @Bean
-    public Job statJob(){
-        return jobBuilderFactory.get("stationJob")
+    public Job statJob() {
+        return jobBuilderFactory.get("statJob")
                 .start(insertStatStep())    //호출 결과로부터
                 .build();
     }
 
     /**
      * STEP 2.호출한 데이터 DB에 입력
-     * */
+     */
     @Bean
-    public Step insertStatStep(){
+    public Step insertStatStep() {
         return stepBuilderFactory.get("insertStatStep")
-                .<StationEntity, StationEntity>chunk(10)
-                .reader(new CustomItemReader<>(stationMapper.jsonToList(puzzleApi.callMetaInfoApi())))
+                .<RequestStatEntity, StatEntity>chunk(10)
+                .reader(new CustomItemReader<>(requestStatRepository.findAll()))
+                .processor(statProcessor())
                 .writer(statWriter())
                 .build();
     }
 
     @Bean
     @StepScope
-    public MyBatisBatchItemWriter<StationEntity> statWriter(){
-        MyBatisBatchItemWriter<StationEntity> writer = new MyBatisBatchItemWriter<>();
+    public ItemProcessor<RequestStatEntity, StatEntity> statProcessor(){
+        return item ->
+                StatEntity.from(statMapper.jsonToMap(puzzleApi.callStaticsApi(item.getStationCode(), item.getRequestHour(), null)));
+    }
+
+    @Bean
+    @StepScope
+    public MyBatisBatchItemWriter<StatEntity> statWriter() {
+        MyBatisBatchItemWriter<StatEntity> writer = new MyBatisBatchItemWriter<>();
         writer.setSqlSessionFactory(sqlSessionFactory);
-        writer.setStatementId("com.ujo.test.batch.repository.StationRepository.save");
+        writer.setStatementId("com.ujo.test.batch.repository.StatRepository.save");
         return writer;
     }
 }
