@@ -26,7 +26,6 @@ class StcisUtilTest {
 
     }
 
-    @Test
     void requestPuzzleApi(String url, String parameters) {
         String apiKey = "Z1iuLatVLQ9FsfIlE7R0H1ti9esZmLkUa996f691";
         StringBuffer result = new StringBuffer();

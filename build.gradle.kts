@@ -30,14 +30,25 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-batch")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.batch:spring-batch-test")
+
+	//mybitis
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0")
+	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.3")
 
 	//jsp
 	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
 	implementation("javax.servlet:jstl")
+
+	//lombok
+	implementation("org.projectlombok:lombok:1.18.26")
+	annotationProcessor("org.projectlombok:lombok:1.18.12")
+
+	//json
+	implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
 }
 

@@ -1,4 +1,4 @@
-package com.ujo.test.utils.apiUtils;
+package com.ujo.test.common.utils.apiUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,32 +16,10 @@ public class CommonApi {
     private URL url;
     private RuntimeException exception;
 
-    public CommonApi(String url, RuntimeException exception) {
-        try {
-            this.exception = exception;
-            this.url = new URL(url);
-            this.httpURLConnection = (HttpURLConnection) this.url.openConnection();
-        } catch (IOException e) {
-            throw exception;
-        }
-    }
-
-    /**
-     * request 속성(헤더) 세팅
-     * */
-    public void setRequestMethod(String method) {
-        try {
-            this.httpURLConnection.setRequestMethod(method);
-        } catch (ProtocolException e) {
-            throw this.exception;
-        }
-    }
-
-    /**
-     * request 속성(헤더) 세팅
-     * */
-    public void setRequestProperty(String key, String value) {
-        this.httpURLConnection.setRequestProperty(key, value);
+    private CommonApi(ApiBuilder builder) {
+        this.exception = builder.exception;
+        this.url = builder.url;
+        this.httpURLConnection = (HttpURLConnection) builder.httpURLConnection;
     }
 
     /**
@@ -73,9 +51,9 @@ public class CommonApi {
     private String parsingBuffer(BufferedReader bufferedReader) throws IOException {
         StringBuilder result = new StringBuilder();
         try {
-            while (true) {
-                if (!bufferedReader.ready()) break;
-                result.append(bufferedReader.readLine());
+            String line;
+            while((line = bufferedReader.readLine()) != null) {
+                result.append(line);
             }
 
             return result.toString();
@@ -88,4 +66,47 @@ public class CommonApi {
 
     }
 
+    public static class ApiBuilder {
+
+        private HttpURLConnection httpURLConnection;
+        private URL url;
+        private RuntimeException exception;
+
+        public ApiBuilder(String url, RuntimeException exception) {
+            try {
+                this.exception = exception;
+                this.url = new URL(url);
+                this.httpURLConnection = (HttpURLConnection) this.url.openConnection();
+            } catch (IOException e) {
+                throw exception;
+            }
+        }
+
+        /**
+         * request 속성(헤더) 세팅
+         */
+        public ApiBuilder setRequestMethod(String method) {
+            try {
+                this.httpURLConnection.setRequestMethod(method);
+
+                return this;
+            } catch (ProtocolException e) {
+                throw this.exception;
+            }
+        }
+
+        /**
+         * request 속성(헤더) 세팅
+         */
+        public ApiBuilder setRequestProperty(String key, String value) {
+            this.httpURLConnection.setRequestProperty(key, value);
+
+            return this;
+        }
+
+        public CommonApi build() {
+            return new CommonApi(this);
+        }
+    }
 }
+

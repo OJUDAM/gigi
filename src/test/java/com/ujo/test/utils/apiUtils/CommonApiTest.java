@@ -1,8 +1,10 @@
 package com.ujo.test.utils.apiUtils;
 
 
+import com.ujo.test.common.exception.BusinessException;
+import com.ujo.test.common.exception.ErrorCode;
+import com.ujo.test.common.utils.apiUtils.CommonApi;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class CommonApiTest {
 
@@ -14,12 +16,12 @@ class CommonApiTest {
 
         url += station;
 
-        CommonApi commonApi = new CommonApi(url, new RuntimeException());
 
-        commonApi.setRequestMethod("GET");
-
-        commonApi.setRequestProperty("Accept", "application/json");
-        commonApi.setRequestProperty("appKey", apiKey);
+        CommonApi commonApi = new CommonApi.ApiBuilder(url, new BusinessException("퍼즐 지하철 혼잡도 API 호출 중 오류 발생했습니다.", ErrorCode.PZ01))
+                .setRequestMethod("GET")
+                .setRequestProperty("Accept", "application/json")
+                .setRequestProperty("appKey", apiKey)
+                .build();
 
         System.out.println(commonApi.callApi());
         System.out.println("test");
