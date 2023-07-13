@@ -1,30 +1,24 @@
 package com.ujo.test.batch.job;
 
-import com.ujo.test.batch.entity.*;
+import com.ujo.test.batch.entity.StatEntity;
+import com.ujo.test.batch.entity.StatMapper;
 import com.ujo.test.batch.repository.RequestStatRepository;
-import com.ujo.test.batch.repository.StatRepository;
-import com.ujo.test.batch.repository.StationRepository;
-import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.common.utils.apiUtils.PuzzleApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
-import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Configuration
@@ -48,25 +42,31 @@ public class StatJobConfiguration {
     }
 
     /**
-     * STEP 2.호출한 데이터 DB에 입력
+     * STEP 1.REQUEST_STAT 조회하여 지하철 통계 API 조회 후 리스트로 변환
      */
     @Bean
+    @StepScope
     public Step insertStatStep() {
         return stepBuilderFactory.get("insertStatStep")
-                .<RequestStatEntity, StatEntity>chunk(10)
-                .reader(new CustomItemReader<>(requestStatRepository.findAll()))
+                .<Map<String,Object>, StatEntity>chunk(10)
+                .reader(new CustomItemReader<>(statMapper.jsonArrayToList(puzzleApi.callStaticsApi(requestStatRepository.findAll()))))
                 .processor(statProcessor())
                 .writer(statWriter())
                 .build();
     }
 
+    /**
+     * STEP 2.MAP -> ENTITY 변환
+     */
     @Bean
     @StepScope
-    public ItemProcessor<RequestStatEntity, StatEntity> statProcessor(){
-        return item ->
-                StatEntity.from(statMapper.jsonToMap(puzzleApi.callStaticsApi(item.getStationCode(), item.getRequestHour(), null)));
+    public ItemProcessor<Map<String,Object>, StatEntity> statProcessor(){
+        return item -> StatEntity.from(item);
     }
 
+    /**
+     * STEP 3.STATION_STAT 에 저장
+     */
     @Bean
     @StepScope
     public MyBatisBatchItemWriter<StatEntity> statWriter() {

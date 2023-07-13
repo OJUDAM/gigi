@@ -3,6 +3,8 @@ package com.ujo.test.batch.repository;
 import com.ujo.test.batch.entity.StationEntity;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface StationRepository {
 
@@ -13,4 +15,24 @@ public interface StationRepository {
 
     @Select("SELECT * FROM STATION WHERE STATION_CODE = #{code}")
     StationEntity findAllByCode(@Param("code") String code);
+
+    @Select(" SELECT * FROM STATION WHERE IS_BATCHABLE = 1" +
+            " ORDER BY STATION_CODE" +
+            " LIMIT #{_pagesize}")
+    List<StationEntity> findAllAsRowNum(@Param("_pagesize")int rowNum);
+
+    @Update(" UPDATE STATION" +
+            " SET IS_BATCHABLE = 0" +
+            " ,UPDATED_AT = NOW()" +
+            " WHERE STATION_CODE = #{stationCode}")
+    int updateBatchFlag(@Param("stationCode") String stationCode);
+
+    @Update(" UPDATE STATION" +
+            " SET IS_BATCHABLE = 1" +
+            " ,UPDATED_AT = NOW()")
+    int updateResetBatchFlag();
+
+    @Select(" SELECT COUNT(STATION_CODE) FROM STATION" +
+            " WHERE IS_BATCHABLE = 1")
+    int countBatchFlag();
 }

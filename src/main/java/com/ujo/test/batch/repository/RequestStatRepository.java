@@ -1,10 +1,7 @@
 package com.ujo.test.batch.repository;
 
 import com.ujo.test.batch.entity.RequestStatEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,4 +15,12 @@ public interface RequestStatRepository {
 
     @Select("SELECT * FROM REQUEST_STAT")
     List<RequestStatEntity> findAll();
+
+    @Select(" SELECT STATION_CODE FROM REQUEST_STAT" +
+            " GROUP BY STATION_CODE" +
+            " LIMIT #{_skiprows}, #{_pagesize}")
+    List<RequestStatEntity> findStationCodes(@Param("_pagesize") int pageSize);
+
+    @Delete("DELETE FROM REQUEST_STAT")
+    int deleteAll();
 }

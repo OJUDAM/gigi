@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class StationRepositoryTest {
@@ -39,6 +41,17 @@ class StationRepositoryTest {
         System.out.println(station.toString());
 
         Assert.assertEquals("정자역", station.getStationName());
+    }
+
+    @Test
+    void findAsRowNumTest() {
+        List<StationEntity> stations = stationRepository.findAllAsRowNum(20);
+
+        for (StationEntity station : stations) {
+            System.out.println(station.toString());
+        }
+
+        Assert.assertEquals(20, stations.size());
     }
 
 }

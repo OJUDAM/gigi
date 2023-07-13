@@ -22,6 +22,11 @@ public class StatEntity extends BaseEntity{
     private int congestionMin30;
     private int congestionMin40;
     private int congestionMin50;
+    private int upDnLine;
+    private int directAt;
+    private String prevStationCode;
+    private String startStationCode;
+    private String endStationCode;
     private String startDate;
     private String endDate;
 

@@ -1,5 +1,7 @@
 package com.ujo.test.common.utils.apiUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * http 통신 유틸리티
  * */
+@Slf4j
 public class CommonApi {
     private HttpURLConnection httpURLConnection;
     private URL url;
@@ -27,16 +30,18 @@ public class CommonApi {
      * */
     public String callApi() {
         BufferedReader bufferedReader = null;
+
         try {
             //호출 응답 코드 200번대 가 아니면 로그 기록 후 예외 던짐
             if (httpURLConnection.getResponseCode() < 200 || httpURLConnection.getResponseCode() > 300) {
                 bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream(), StandardCharsets.UTF_8));
                 //TODO: 로그남기기로 변경해야함
-                System.out.println(parsingBuffer(bufferedReader));
+                log.error(parsingBuffer(bufferedReader));
 
                 //예외 던짐
                 throw this.exception;
             }
+
 
             //호출 정상 응답시
             bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), StandardCharsets.UTF_8));

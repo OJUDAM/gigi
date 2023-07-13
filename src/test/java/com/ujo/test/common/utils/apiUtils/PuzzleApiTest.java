@@ -3,20 +3,24 @@ package com.ujo.test.common.utils.apiUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.common.utils.jsonUtils.CommonJSON;
 import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
 import com.ujo.test.batch.entity.StatEntity;
 import com.ujo.test.batch.entity.StatMapper;
 import com.ujo.test.batch.entity.StationEntity;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -44,6 +48,25 @@ class PuzzleApiTest {
     }
 
     @Test
+    @DisplayName("STAT API JSON -> LIST 파싱")
+    public void mapperListTest(){
+        String response = "{\"status\":\n" +
+                "{\"code\":\"00\",\"message\":\"success\",\"totalCount\":1},\"contents\":{\"subwayLine\":\"신분당선\",\"stationName\":\"정자역\",\"stationCode\":\"D12\",\"stat\":[{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D12\",\"endStationName\":\"정자역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":0}]},{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D19\",\"endStationName\":\"광교역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":104},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":102},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":126},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":140},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":147},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":146}]},{\"startStationCode\":\"D19\",\"startStationName\":\"광교역\",\"endStationCode\":\"D04\",\"endStationName\":\"신사역\",\"prevStationCode\":\"D13\",\"prevStationName\":\"미금역\",\"updnLine\":0,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":58},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":67},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":77},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":71},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":78},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":62}]}],\"statStartDate\":\"20230329\",\"statEndDate\":\"20230628\"}}";
+
+        List<Map<String, Object>> list = statMapper.jsonToList(response);
+
+        for (Map<String, Object> objectMap : list) {
+            StatEntity statEntity = StatEntity.from(objectMap);
+
+            System.out.println(statEntity.toString());
+        }
+
+        Assertions.assertEquals(2, list.size());
+
+    }
+
+    @Test
+    @DisplayName("STAT API JSON -> MAP 파싱")
     public void mapperTest(){
         String response = "{\"status\":\n" +
                 "{\"code\":\"00\",\"message\":\"success\",\"totalCount\":1},\"contents\":{\"subwayLine\":\"신분당선\",\"stationName\":\"정자역\",\"stationCode\":\"D12\",\"stat\":[{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D12\",\"endStationName\":\"정자역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":0}]},{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D19\",\"endStationName\":\"광교역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":104},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":102},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":126},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":140},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":147},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":146}]},{\"startStationCode\":\"D19\",\"startStationName\":\"광교역\",\"endStationCode\":\"D04\",\"endStationName\":\"신사역\",\"prevStationCode\":\"D13\",\"prevStationName\":\"미금역\",\"updnLine\":0,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":58},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":67},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":77},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":71},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":78},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":62}]}],\"statStartDate\":\"20230329\",\"statEndDate\":\"20230628\"}}";
@@ -54,6 +77,66 @@ class PuzzleApiTest {
 
         System.out.println(statEntity.toString());
 
+    }
+
+    @Test
+    void requestExitTest() throws ParseException, JsonProcessingException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(Calendar.DATE, -7);
+
+        String dateBeforeWeek = format.format(calendar.getTime());
+
+        CustomJSONParser jsonParser = new CustomJSONParser();
+        JSONObject jsonObject = jsonParser.parse(puzzleApi.callExitApi("D12",dateBeforeWeek));
+
+        CommonJSON.CommonJSONBuilder commonJSONBuilder =  new CommonJSON.CommonJSONBuilder(jsonObject)
+                .parseObject("status");
+
+        JSONObject status = commonJSONBuilder
+                .build()
+                .getJsonObject();
+
+        String responseCode = status.get("code").toString();
+        String responseMessage = status.get("message").toString();
+
+
+        JSONArray rawArray =  new CommonJSON.CommonJSONBuilder(jsonObject)
+                .parseObject("contents")
+                .parseArray("raw")
+                .build().getJsonArray();
+
+        Map<String, Integer> countMap = new HashMap<>();
+
+
+        //00 10 20 30 40 50
+        for (int i = 0; i < rawArray.size(); i++) {
+
+            JSONObject raw = (JSONObject) rawArray.get(i);
+
+            String datetime = raw.get("datetime").toString();
+
+            if (raw.get("userCount") == null) {
+                continue;
+            }
+
+            int userCount = Integer.parseInt(raw.get("userCount").toString());
+            if (!datetime.equals(dateBeforeWeek + "170000") && !datetime.equals(dateBeforeWeek + "180000") && !datetime.equals(dateBeforeWeek + "190000")) {
+                continue;
+            }
+
+            if(countMap.containsKey(datetime)){
+                countMap.put(datetime, countMap.get(datetime) + userCount);
+                continue;
+            }
+
+            countMap.put(datetime, userCount);
+        }
+
+        Assertions.assertEquals(3, countMap.size());
     }
 
     @Test
@@ -87,10 +170,10 @@ class PuzzleApiTest {
     @Test
     public void requestPuzzleApi() throws ParseException {
 
-        String response = puzzleApi.callStaticsApi("D12", "18", "MON");
+//        String response = puzzleApi.callStaticsApi("D12", "19", "MON");
 
-//        String response = "{\"status\":\n" +
-//                "{\"code\":\"00\",\"message\":\"success\",\"totalCount\":1},\"contents\":{\"subwayLine\":\"신분당선\",\"stationName\":\"정자역\",\"stationCode\":\"D12\",\"stat\":[{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D12\",\"endStationName\":\"정자역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":0}]},{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D19\",\"endStationName\":\"광교역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":104},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":102},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":126},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":140},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":147},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":146}]},{\"startStationCode\":\"D19\",\"startStationName\":\"광교역\",\"endStationCode\":\"D04\",\"endStationName\":\"신사역\",\"prevStationCode\":\"D13\",\"prevStationName\":\"미금역\",\"updnLine\":0,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":58},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":67},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":77},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":71},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":78},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":62}]}],\"statStartDate\":\"20230329\",\"statEndDate\":\"20230628\"}}";
+        String response = "{\"status\":\n" +
+                "{\"code\":\"00\",\"message\":\"success\",\"totalCount\":1},\"contents\":{\"subwayLine\":\"신분당선\",\"stationName\":\"정자역\",\"stationCode\":\"D12\",\"stat\":[{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D12\",\"endStationName\":\"정자역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":0},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":0}]},{\"startStationCode\":\"D04\",\"startStationName\":\"신사역\",\"endStationCode\":\"D19\",\"endStationName\":\"광교역\",\"prevStationCode\":\"D11\",\"prevStationName\":\"판교역\",\"updnLine\":1,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":104},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":102},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":126},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":140},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":147},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":146}]},{\"startStationCode\":\"D19\",\"startStationName\":\"광교역\",\"endStationCode\":\"D04\",\"endStationName\":\"신사역\",\"prevStationCode\":\"D13\",\"prevStationName\":\"미금역\",\"updnLine\":0,\"directAt\":0,\"data\":[{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"00\",\"congestionTrain\":58},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"10\",\"congestionTrain\":67},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"20\",\"congestionTrain\":77},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"30\",\"congestionTrain\":71},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"40\",\"congestionTrain\":78},{\"dow\":\"FRI\",\"hh\":\"17\",\"mm\":\"50\",\"congestionTrain\":62}]}],\"statStartDate\":\"20230329\",\"statEndDate\":\"20230628\"}}";
         CustomJSONParser jsonParser = new CustomJSONParser();
         JSONObject jsonObject = jsonParser.parse(response);
 
