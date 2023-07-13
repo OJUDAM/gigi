@@ -22,9 +22,9 @@
 <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <title>GiGi</title>
 </head>
-<body>
-    <h3>테스트</h3>
-</body>
 </html>
