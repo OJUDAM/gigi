@@ -9,5 +9,6 @@ import lombok.ToString;
 @ToString
 public class RequestStatEntity extends BaseEntity {
     private String stationCode;
+    private String requestDate;
     private String requestHour;
 }

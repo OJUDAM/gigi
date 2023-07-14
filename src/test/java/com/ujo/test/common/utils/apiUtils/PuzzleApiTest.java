@@ -1,8 +1,11 @@
 package com.ujo.test.common.utils.apiUtils;
 
+import com.fasterxml.jackson.core.JsonFactoryBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ujo.test.batch.entity.ExitEntity;
+import com.ujo.test.common.utils.DateUtils;
 import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.common.utils.jsonUtils.CommonJSON;
 import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
@@ -82,13 +85,8 @@ class PuzzleApiTest {
     @Test
     void requestExitTest() throws ParseException, JsonProcessingException {
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.add(Calendar.DATE, -7);
-
-        String dateBeforeWeek = format.format(calendar.getTime());
+        String dateBeforeWeek = DateUtils.addDate("yyyyMMdd",-7);
 
         CustomJSONParser jsonParser = new CustomJSONParser();
         JSONObject jsonObject = jsonParser.parse(puzzleApi.callExitApi("D12",dateBeforeWeek));
@@ -103,13 +101,15 @@ class PuzzleApiTest {
         String responseCode = status.get("code").toString();
         String responseMessage = status.get("message").toString();
 
-
-        JSONArray rawArray =  new CommonJSON.CommonJSONBuilder(jsonObject)
+        JSONObject contents = new CommonJSON.CommonJSONBuilder(jsonObject)
                 .parseObject("contents")
-                .parseArray("raw")
-                .build().getJsonArray();
+                .build().getJsonObject();
 
-        Map<String, Integer> countMap = new HashMap<>();
+        String stationCode = contents.get("stationCode").toString();
+
+        JSONArray rawArray = (JSONArray) contents.get("raw");
+
+        Map<String, Object> countMap = new HashMap<>();
 
 
         //00 10 20 30 40 50
@@ -128,15 +128,22 @@ class PuzzleApiTest {
                 continue;
             }
 
-            if(countMap.containsKey(datetime)){
-                countMap.put(datetime, countMap.get(datetime) + userCount);
+            String userCountKey = "userCount" + datetime.substring(8, 10);
+
+            if(countMap.containsKey(userCountKey)){
+                countMap.put(userCountKey, (int)countMap.get(userCountKey) + userCount);
                 continue;
             }
 
-            countMap.put(datetime, userCount);
+            countMap.put(userCountKey, userCount);
         }
 
-        Assertions.assertEquals(3, countMap.size());
+        countMap.put("date", dateBeforeWeek);
+        countMap.put("stationCode", stationCode);
+
+        ExitEntity exit = ExitEntity.from(countMap);
+
+        Assertions.assertEquals(5, countMap.size());
     }
 
     @Test

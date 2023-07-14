@@ -1,0 +1,87 @@
+package com.ujo.test.batch.entity;
+
+import com.ujo.test.common.constants.StatConstant;
+import com.ujo.test.common.exception.BusinessException;
+import com.ujo.test.common.exception.ErrorCode;
+import com.ujo.test.common.utils.DateUtils;
+import com.ujo.test.common.utils.jsonUtils.CommonJSON;
+import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class ExitMapper extends BaseMapper {
+
+    @Override
+    public Map<String, Object> jsonToMap(String jsonString) {
+        try{
+            String dateBeforeWeek = DateUtils.addDate("yyyyMMdd", StatConstant.EXIT_PREV_DAYS);
+
+            CustomJSONParser jsonParser = new CustomJSONParser();
+            JSONObject jsonObject = jsonParser.parse(jsonString);
+
+            this.checkStatus(jsonObject);
+
+            JSONObject contents = new CommonJSON.CommonJSONBuilder(jsonObject)
+                    .parseObject("contents")
+                    .build().getJsonObject();
+
+            String stationCode = contents.get("stationCode").toString();
+
+            JSONArray rawArray = (JSONArray) contents.get("raw");
+
+            Map<String, Object> countMap = new HashMap<>();
+
+
+            //00 10 20 30 40 50
+            for (int i = 0; i < rawArray.size(); i++) {
+
+                JSONObject raw = (JSONObject) rawArray.get(i);
+
+                String datetime = raw.get("datetime").toString();
+
+                if (raw.get("userCount") == null) {
+                    continue;
+                }
+
+                int userCount = Integer.parseInt(raw.get("userCount").toString());
+                if (!datetime.equals(dateBeforeWeek + "170000") && !datetime.equals(dateBeforeWeek + "180000") && !datetime.equals(dateBeforeWeek + "190000")) {
+                    continue;
+                }
+
+                String userCountKey = "userCount" + datetime.substring(8, 10);
+
+                if(countMap.containsKey(userCountKey)){
+                    countMap.put(userCountKey, (int)countMap.get(userCountKey) + userCount);
+                    continue;
+                }
+                countMap.put("date", dateBeforeWeek);
+                countMap.put(userCountKey, userCount);
+            }
+
+            countMap.put("stationCode", stationCode);
+
+            return countMap;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new BusinessException("json 에서 맵으로 변환하는 과정에서 에러 발생", ErrorCode.E001);
+        }
+    }
+
+    public List<Map<String, Object>> jsonArrayToMaps(List<String> jsonArray) {
+        List<Map<String, Object>> exitMaps = new ArrayList<>();
+
+        for (String json : jsonArray) {
+            exitMaps.add(jsonToMap(json));
+        }
+
+        return exitMaps;
+    }
+}

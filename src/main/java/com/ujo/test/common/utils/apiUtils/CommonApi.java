@@ -35,7 +35,7 @@ public class CommonApi {
             //호출 응답 코드 200번대 가 아니면 로그 기록 후 예외 던짐
             if (httpURLConnection.getResponseCode() < 200 || httpURLConnection.getResponseCode() > 300) {
                 bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getErrorStream(), StandardCharsets.UTF_8));
-                //TODO: 로그남기기로 변경해야함
+
                 log.error(parsingBuffer(bufferedReader));
 
                 //예외 던짐
@@ -45,7 +45,13 @@ public class CommonApi {
 
             //호출 정상 응답시
             bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), StandardCharsets.UTF_8));
-            return parsingBuffer(bufferedReader);
+
+            String result = parsingBuffer(bufferedReader);
+
+            //결과 기록
+            log.debug(result);
+
+            return result;
         } catch (IOException e) {
             throw this.exception;
         } finally {

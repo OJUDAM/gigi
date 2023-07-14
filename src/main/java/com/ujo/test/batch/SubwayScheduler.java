@@ -1,9 +1,6 @@
 package com.ujo.test.batch;
 
-import com.ujo.test.batch.job.RequestSettingJobConfiguration;
-import com.ujo.test.batch.job.ResetSettingJobConfiguration;
-import com.ujo.test.batch.job.StatJobConfiguration;
-import com.ujo.test.batch.job.StationJobConfiguration;
+import com.ujo.test.batch.job.*;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -27,7 +24,9 @@ public class SubwayScheduler {
     @Autowired
     private RequestSettingJobConfiguration requestSettingJobConfiguration;
     @Autowired
-    ResetSettingJobConfiguration resetSettingJobConfiguration;
+    private ResetSettingJobConfiguration resetSettingJobConfiguration;
+    @Autowired
+    private ExitJobConfiguration exitJobConfiguration;
 
     @Scheduled(cron = "0 30 2 11 * *")
     public void runStationJob(){
@@ -35,12 +34,21 @@ public class SubwayScheduler {
         this.runJob("Start-Station-Batch", stationJobConfiguration.stationJob());
     }
 
+    //@Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 15 1 * * *")
     public void runStatJob(){
         //지하철 역 이용 통계 자료 입력 배치
         this.runJob("Start-Stat-Batch", statJobConfiguration.statJob());
     }
 
+    //@Scheduled(cron = "0 5 17 * * *")
+    @Scheduled(cron = "0 20 1 * * *")
+    public void runExitJob(){
+        //지하철 역 정보 입력 배치
+        this.runJob("Start-Exit-Batch", exitJobConfiguration.exitJob());
+    }
+
+//    @Scheduled(cron = "0 00 17 * * *")
     @Scheduled(cron = "0 10 1 * * *")
     public void runRequestSettingJob(){
         //지하철 역 이용 통계 자료 입력 배치
@@ -48,7 +56,8 @@ public class SubwayScheduler {
     }
 
 //    @Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 30 1 * * *")
+//    @Scheduled(cron = "0 8 17 * * *")
+     @Scheduled(cron = "0 30 1 * * *")
     public void runResetSettingJob(){
         //지하철 역 이용 통계 자료 입력 배치
         this.runJob("Start-Reset-Setting-Batch", resetSettingJobConfiguration.resetSettingJob());

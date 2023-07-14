@@ -71,6 +71,25 @@ public class PuzzleApi {
         return requestPuzzleApi(url.getUrl(), "지하철 출구 이용 통계");
     }
 
+    public String callExitApi(RequestStatEntity requestStat){
+        CommonUrl url = new CommonUrl.UrlBuilder(puzzleExitUrl)
+                .setPathParam(requestStat.getStationCode())
+                .startQueryStringParam("date", requestStat.getRequestDate())
+                .build();
+
+        return requestPuzzleApi(url.getUrl(), "지하철 출구 이용 통계");
+    }
+
+    public List<String> callExitApi(List<RequestStatEntity> requestStats){
+
+        List<String> exitList = new ArrayList<>();
+        for (RequestStatEntity requestStat : requestStats) {
+            exitList.add(this.callExitApi(requestStat));
+        }
+
+        return exitList;
+    }
+
     public String callMetaInfoApi(){
         CommonUrl url = new CommonUrl.UrlBuilder(puzzleMetaUrl)
                 .startQueryStringParam("type", "exit")

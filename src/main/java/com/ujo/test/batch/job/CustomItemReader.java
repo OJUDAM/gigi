@@ -6,11 +6,13 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;
 import org.springframework.batch.item.ParseException;
 import org.springframework.batch.item.UnexpectedInputException;
+import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@StepScope
+
+
 public class CustomItemReader<T> implements ItemReader<T>{
 
     private List<T> items;

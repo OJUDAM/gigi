@@ -11,6 +11,7 @@ import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
@@ -45,7 +46,7 @@ public class StatJobConfiguration {
      * STEP 1.REQUEST_STAT 조회하여 지하철 통계 API 조회 후 리스트로 변환
      */
     @Bean
-    @StepScope
+    @JobScope
     public Step insertStatStep() {
         return stepBuilderFactory.get("insertStatStep")
                 .<Map<String,Object>, StatEntity>chunk(10)
@@ -73,6 +74,8 @@ public class StatJobConfiguration {
         MyBatisBatchItemWriter<StatEntity> writer = new MyBatisBatchItemWriter<>();
         writer.setSqlSessionFactory(sqlSessionFactory);
         writer.setStatementId("com.ujo.test.batch.repository.StatRepository.save");
+
+        log.debug("com.ujo.test.batch.repository.StatRepository.save");
         return writer;
     }
 }

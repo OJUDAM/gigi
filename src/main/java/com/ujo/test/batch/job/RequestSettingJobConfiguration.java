@@ -1,7 +1,10 @@
 package com.ujo.test.batch.job;
 
 import com.ujo.test.batch.entity.*;
+import com.ujo.test.batch.repository.RequestStatRepository;
 import com.ujo.test.batch.repository.StationRepository;
+import com.ujo.test.common.constants.StatConstant;
+import com.ujo.test.common.utils.DateUtils;
 import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.common.utils.apiUtils.PuzzleApi;
 import lombok.RequiredArgsConstructor;
@@ -59,10 +62,21 @@ public class RequestSettingJobConfiguration {
         return stepBuilderFactory.get("insertRequestSettingStep")
                 .<RequestStatEntity, RequestStatEntity>chunk(CHUNK_SIZE)
                 .reader(new CustomItemReader<>(requestStatMapper.stationsToRequestList(stationRepository.findAllAsRowNum(CHUNK_SIZE))))
+                .processor(requestSettingProcessor())
                 .writer(requestSettingWriter())
                 .build();
     }
-
+    
+    @Bean
+    @StepScope
+    public ItemProcessor<RequestStatEntity, RequestStatEntity> requestSettingProcessor(){
+        return item -> {
+            //출구 이용자수 요청위해 일주일전 날짜 입력
+            item.setRequestDate(DateUtils.addDate("yyyyMMdd", StatConstant.EXIT_PREV_DAYS));
+            return item;
+        };
+    }
+    
     @Bean
     @StepScope
     public MyBatisBatchItemWriter<RequestStatEntity> requestSettingWriter(){
