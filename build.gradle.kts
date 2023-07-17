@@ -35,6 +35,9 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.batch:spring-batch-test")
 
+	//log4jdbc
+	implementation ("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+
 	//mybitis
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.3")
