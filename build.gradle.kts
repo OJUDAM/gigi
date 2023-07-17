@@ -24,7 +24,8 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 
 repositories {
-	mavenCentral()
+	mavenCentral();
+	maven { setUrl("https://jitpack.io") }
 }
 
 dependencies {
@@ -37,6 +38,9 @@ dependencies {
 
 	//log4jdbc
 	implementation ("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+
+	//logback discord
+	implementation ("com.github.napstr:logback-discord-appender:1.0.0")
 
 	//mybitis
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0")

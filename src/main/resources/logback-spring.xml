@@ -26,6 +26,26 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
+
+    <!--Discord Log-->
+    <springProperty name="DISCORD_WEBHOOK_URI" source="logging.discord.webhook-uri"/>
+    <appender name="DISCORD" class="com.github.napstr.logback.DiscordAppender">
+        <webhookUri>${DISCORD_WEBHOOK_URI}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %msg %n</pattern>
+        </layout>
+        <username>GiGi-Server-Log</username>
+        <avatarUrl>https://cdn.pixabay.com/photo/2023/04/23/08/41/meditation-7945285_640.jpg</avatarUrl>
+        <tts>false</tts>
+    </appender>
+
+    <appender name="ASYNC_DISCORD" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="DISCORD" />
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
     <!-- File Appender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 파일경로 설정 -->
@@ -98,6 +118,7 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="Error"/>
+        <appender-ref ref="ASYNC_DISCORD"/>
     </root>
     <!-- 특정패키지 로깅레벨 설정 -->
     <logger name="org.apache.ibatis" level="DEBUG" additivity="false">
@@ -110,9 +131,11 @@
     <Logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DB"/>
+        <appender-ref ref="ASYNC_DISCORD"/>
     </Logger>
     <Logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DB"/>
+        <appender-ref ref="ASYNC_DISCORD"/>
     </Logger>
 </configuration>
