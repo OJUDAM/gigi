@@ -15,10 +15,13 @@ import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.support.CompositeItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -51,7 +54,7 @@ public class StatJobConfiguration {
         return stepBuilderFactory.get("insertStatStep")
                 .<Map<String,Object>, StatEntity>chunk(10)
                 .reader(new CustomItemReader<>(statMapper.jsonArrayToList(puzzleApi.callStaticsApi(requestStatRepository.findAll()))))
-                .processor(statProcessor())
+                .processor(compositeStatProcessor())
                 .writer(statWriter())
                 .build();
     }
@@ -61,6 +64,16 @@ public class StatJobConfiguration {
      */
     @Bean
     @StepScope
+    public CompositeItemProcessor compositeStatProcessor(){
+        List<ItemProcessor> delegates = new ArrayList<>(1);
+        delegates.add(statProcessor());
+
+        CompositeItemProcessor processor = new CompositeItemProcessor();
+        processor.setDelegates(delegates);
+        return processor;
+    }
+
+    @Bean
     public ItemProcessor<Map<String,Object>, StatEntity> statProcessor(){
         return item -> StatEntity.from(item);
     }
@@ -74,8 +87,6 @@ public class StatJobConfiguration {
         MyBatisBatchItemWriter<StatEntity> writer = new MyBatisBatchItemWriter<>();
         writer.setSqlSessionFactory(sqlSessionFactory);
         writer.setStatementId("com.ujo.test.batch.repository.StatRepository.save");
-
-        log.debug("com.ujo.test.batch.repository.StatRepository.save");
         return writer;
     }
 }

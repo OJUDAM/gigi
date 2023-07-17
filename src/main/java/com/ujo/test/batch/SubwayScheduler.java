@@ -41,7 +41,7 @@ public class SubwayScheduler {
         this.runJob("Start-Stat-Batch", statJobConfiguration.statJob());
     }
 
-    //@Scheduled(cron = "0 5 17 * * *")
+    //@Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 20 1 * * *")
     public void runExitJob(){
         //지하철 역 정보 입력 배치

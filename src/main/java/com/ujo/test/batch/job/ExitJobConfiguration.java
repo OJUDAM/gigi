@@ -51,7 +51,7 @@ public class ExitJobConfiguration {
     @Bean
     @JobScope
     public Step insertExitStep() {
-        return stepBuilderFactory.get("insertStatStep")
+        return stepBuilderFactory.get("insertExitStep")
                 .<Map<String,Object>, ExitEntity>chunk(10)
                 .reader(new CustomItemReader<>(exitMapper.jsonArrayToMaps(puzzleApi.callExitApi(requestStatRepository.findCodeAndDate()))))
                 .processor(exitProcessor())
