@@ -19,6 +19,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.support.CompositeItemProcessor;
 import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +63,22 @@ public class RequestSettingJobConfiguration {
         return stepBuilderFactory.get("insertRequestSettingStep")
                 .<RequestStatEntity, RequestStatEntity>chunk(CHUNK_SIZE)
                 .reader(new CustomItemReader<>(requestStatMapper.stationsToRequestList(stationRepository.findAllAsRowNum(CHUNK_SIZE))))
-                .processor(requestSettingProcessor())
+                .processor(compositeSettingProcessor())
                 .writer(requestSettingWriter())
                 .build();
     }
-    
+
     @Bean
     @StepScope
+    public CompositeItemProcessor compositeSettingProcessor(){
+        List<ItemProcessor> delegates = new ArrayList<>(1);
+        delegates.add(requestSettingProcessor());
+
+        CompositeItemProcessor processor = new CompositeItemProcessor();
+        processor.setDelegates(delegates);
+        return processor;
+    }
+    @Bean
     public ItemProcessor<RequestStatEntity, RequestStatEntity> requestSettingProcessor(){
         return item -> {
             //출구 이용자수 요청위해 일주일전 날짜 입력

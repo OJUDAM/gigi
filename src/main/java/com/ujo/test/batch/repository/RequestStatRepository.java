@@ -23,7 +23,7 @@ public interface RequestStatRepository {
     @Select(" SELECT STATION_CODE FROM REQUEST_STAT" +
             " GROUP BY STATION_CODE" +
             " LIMIT #{_skiprows}, #{_pagesize}")
-    List<RequestStatEntity> findStationCodes(@Param("_pagesize") int pageSize);
+    List<RequestStatEntity> findStationCodes(@Param("_skiprows") int skipRows, @Param("_pagesize") int pageSize);
 
     @Delete("DELETE FROM REQUEST_STAT")
     int deleteAll();

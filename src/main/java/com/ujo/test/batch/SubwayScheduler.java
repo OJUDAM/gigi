@@ -48,10 +48,10 @@ public class SubwayScheduler {
         this.runJob("Start-Exit-Batch", exitJobConfiguration.exitJob());
     }
 
-//    @Scheduled(cron = "0 00 17 * * *")
+   //@Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 10 1 * * *")
     public void runRequestSettingJob(){
-        //지하철 역 이용 통계 자료 입력 배치
+        //puzzle API 요청 파라미터 입력 배치
         this.runJob("Start-Request-Setting-Batch", requestSettingJobConfiguration.requestSettingJob());
     }
 
