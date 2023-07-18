@@ -35,21 +35,21 @@ public class SubwayScheduler {
     }
 
     //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 15 1 * * *")
+    @Scheduled(cron = "0 40 2 * * *")
     public void runStatJob(){
         //지하철 역 이용 통계 자료 입력 배치
         this.runJob("Start-Stat-Batch", statJobConfiguration.statJob());
     }
 
     //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 20 1 * * *")
+    @Scheduled(cron = "0 50 2 * * *")
     public void runExitJob(){
         //지하철 역 정보 입력 배치
         this.runJob("Start-Exit-Batch", exitJobConfiguration.exitJob());
     }
 
    //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 10 1 * * *")
+    @Scheduled(cron = "0 35 2 * * *")
     public void runRequestSettingJob(){
         //puzzle API 요청 파라미터 입력 배치
         this.runJob("Start-Request-Setting-Batch", requestSettingJobConfiguration.requestSettingJob());
@@ -57,7 +57,7 @@ public class SubwayScheduler {
 
 //    @Scheduled(cron = "0 * * * * *")
 //    @Scheduled(cron = "0 8 17 * * *")
-     @Scheduled(cron = "0 30 1 * * *")
+     @Scheduled(cron = "0 55 2 * * *")
     public void runResetSettingJob(){
         //지하철 역 이용 통계 자료 입력 배치
         this.runJob("Start-Reset-Setting-Batch", resetSettingJobConfiguration.resetSettingJob());

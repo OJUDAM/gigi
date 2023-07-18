@@ -11,4 +11,5 @@ public class StationEntity extends BaseEntity{
     private String stationCode;
     private String stationName;
     private String subwayLine;
+    private int isBatchable;
 }

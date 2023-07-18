@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-    <!--Discord Log-->
+    <!--Discord Appender-->
     <springProperty name="DISCORD_WEBHOOK_URI" source="logging.discord.webhook-uri"/>
     <appender name="DISCORD" class="com.github.napstr.logback.DiscordAppender">
         <webhookUri>${DISCORD_WEBHOOK_URI}</webhookUri>

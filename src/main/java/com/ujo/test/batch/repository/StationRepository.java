@@ -18,8 +18,8 @@ public interface StationRepository {
 
     @Select(" SELECT * FROM STATION WHERE IS_BATCHABLE = 1" +
             " ORDER BY STATION_CODE" +
-            " LIMIT #{_pagesize}")
-    List<StationEntity> findAllAsRowNum(@Param("_pagesize")int rowNum);
+            " LIMIT 0, #{rowNum}")
+    List<StationEntity> findAllAsRowNum(@Param("rowNum")int rowNum);
 
     @Update(" UPDATE STATION" +
             " SET IS_BATCHABLE = 0" +

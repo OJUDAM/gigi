@@ -45,7 +45,7 @@ public class RequestSettingJobConfiguration {
     @Autowired
     public SqlSessionFactory sqlSessionFactory;
 
-    private final int CHUNK_SIZE = 20;
+    private final int CHUNK_SIZE = 10;
     @Bean
     public Job requestSettingJob(){
         return jobBuilderFactory.get("requestSettingJob")
@@ -62,7 +62,7 @@ public class RequestSettingJobConfiguration {
     public Step insertRequestSettingStep(){
         return stepBuilderFactory.get("insertRequestSettingStep")
                 .<RequestStatEntity, RequestStatEntity>chunk(CHUNK_SIZE)
-                .reader(new CustomItemReader<>(requestStatMapper.stationsToRequestList(stationRepository.findAllAsRowNum(CHUNK_SIZE))))
+                .reader(new CustomItemReader<>(requestStatMapper.stationsToRequestList(stationRepository.findAllAsRowNum(20))))
                 .processor(compositeSettingProcessor())
                 .writer(requestSettingWriter())
                 .build();
