@@ -49,7 +49,7 @@ public class SubwayScheduler {
     }
 
    //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 35 2 * * *")
+    @Scheduled(cron = "0 38 2 * * *")
     public void runRequestSettingJob(){
         //puzzle API 요청 파라미터 입력 배치
         this.runJob("Start-Request-Setting-Batch", requestSettingJobConfiguration.requestSettingJob());
