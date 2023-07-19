@@ -6,74 +6,6 @@
 <jsp:include page="header/header.jsp"></jsp:include>
 
 <body class="is-preload">
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-        <script>
-            	//차트 색상 랜덤
-        		$(function() {
-        			function randomColor(labels) {
-        				var colors = [];
-        				for (let i = 0; i < labels.length; i++) {
-        					colors.push("#" + Math.round(Math.random() * 0xffffff).toString(16));
-        				}
-        				return colors;
-        			}
-        			function makeChart(ctx, type, labels, data) {
-        				var myChart = new Chart(ctx, {
-        				    type: type,
-        				    data: {
-        				        labels: labels,
-        				        datasets: [{
-        				            label: '지하철 혼잡도',
-        				            data: data,
-        				            //borderColor: Utils.CHART_COLORS.red,
-                                    //backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-        				            backgroundColor: randomColor(labels)
-        				        }]
-        				    },
-        				    options: {
-        					    responsive: false,
-        				        scales: {
-        				            yAxes: [{
-        				                ticks: {
-        				                    beginAtZero: true
-        				                }
-        				            }]
-        				        }
-        				    }
-        				});
-        			}
-
-                  	var jsonData = ${congestions}
-                    var jsonObject = JSON.stringify(jsonData);
-                    var congestionData = JSON.parse(jsonObject);
-
-                    var labelList = new Array();
-                    var valueList = new Array();
-                    var colorList = new Array();
-
-                    for(var i = 0; i<congestionData.length; i++) {
-                    	var congestion = congestionData[i];
-                    	labelList.push(congestion.stationName);
-                    	valueList.push(congestion.congestionMin10);
-                    }
-
-                    var newLabels = labelList.slice(-5);
-                    var newMyData = valueList.slice(-5);
-                    // Chart.js 막대그래프 그리기
-                    var ctx = $('#myChart');
-                    makeChart(ctx, 'bar', newLabels, newMyData);
-
-                   // Chart.js 선그래프 그리기
-                    //ctx = $('#myChart2');
-                    //makeChart(ctx, 'line', newLabels, newMyData);
-                    // Chart.js 원그래프 그리기
-                    //ctx = $('#myChart3');
-                    //makeChart(ctx, 'pie', newLabels, newMyData);
-                    //ctx = $('#myChart4');
-                    //makeChart(ctx, 'doughnut', newLabels, newMyData);
-        		});
-        	</script>
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
 
@@ -102,20 +34,8 @@
 						</div>
 					</section>
 
-				<!-- Two -->
-					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="graph">
-						<div class="content">
-							<h2>그래프</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
-							<ul class="actions stacked">
-								<li><a href="#" class="button">Learn More</a></li>
-							</ul>
-						</div>
-						<div class="image">
-						    <canvas id="myChart"></canvas>
-							<!-- <img src="images/spotlight01.jpg" alt="" /> -->
-						</div>
-					</section>
+                <!-- Two (Graph) -->
+				<jsp:include page="section/graph.jsp"></jsp:include>
 
 				<!-- Three -->
 					<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
@@ -415,7 +335,7 @@
 
 			</div>
 
-		<!-- Scripts -->
+		    <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -423,6 +343,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+            <script src="assets/js/chart.js"></script>
 
 	</body>
 </html>

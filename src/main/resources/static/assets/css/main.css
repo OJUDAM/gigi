@@ -2640,8 +2640,8 @@ input, select, textarea {
 		}
 
         .image canvas {
-        			display: block;
-        			border-radius: 4px;
+            display: block;
+            border-radius: 4px;
         }
 
 		.image.left, .image.right {
@@ -2652,6 +2652,10 @@ input, select, textarea {
 			.image.left img, .image.right img {
 				width: 100%;
 			}
+
+			.image.left canvas, .image.right canvas {
+                width: 100%;
+            }
 
 		.image.left {
 			float: left;
@@ -2675,6 +2679,10 @@ input, select, textarea {
 				width: 100%;
 			}
 
+			.image.fit canvas {
+                width: 100%;
+            }
+
 		.image.main {
 			display: block;
 			margin: 0 0 3rem 0;
@@ -2684,6 +2692,10 @@ input, select, textarea {
 			.image.main img {
 				width: 100%;
 			}
+
+			.image.main canvas {
+                width: 100%;
+            }
 
 /* List */
 
@@ -4916,6 +4928,24 @@ input, select, textarea {
 				border-radius: 0;
 			}
 
+			.spotlight.style1 .image canvas {
+                -moz-object-fit: cover;
+                -webkit-object-fit: cover;
+                -ms-object-fit: cover;
+                object-fit: cover;
+                -moz-object-position: center;
+                -webkit-object-position: center;
+                -ms-object-position: center;
+                object-position: center;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+            }
+
 		@media screen and (max-width: 1680px) {
 
 			.spotlight.style1 .content {
@@ -4976,6 +5006,9 @@ input, select, textarea {
 				.spotlight.style1 .image img {
 					position: relative;
 				}
+				.spotlight.style1 .image canvas {
+                    position: relative;
+                }
 
 	}
 
@@ -5018,6 +5051,20 @@ input, select, textarea {
 			-ms-object-position: right;
 			object-position: right;
 		}
+
+		.spotlight.style1.image-position-left .image canvas {
+            -moz-object-position: left;
+            -webkit-object-position: left;
+            -ms-object-position: left;
+            object-position: left;
+        }
+
+        .spotlight.style1.image-position-right .image canvas {
+            -moz-object-position: right;
+            -webkit-object-position: right;
+            -ms-object-position: right;
+            object-position: right;
+        }
 
 /* Spotlight (style2) */
 
@@ -5804,9 +5851,7 @@ input, select, textarea {
 			object-position: right;
 		}
 
-	.spotlight .image {
-		background-color: rgba(0, 0, 0, 0.125);
-	}
+
 
 	.spotlight.invert .image {
 		background-color: rgba(255, 255, 255, 0.125);
@@ -8515,6 +8560,9 @@ input, select, textarea {
 				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='64px' height='32px' viewBox='0 0 64 32' zoomAndPan='disable'%3E%3Cstyle%3Erect %7Bfill: transparent%3B stroke: white%3B stroke-width: 1px%3B %7D%3C/style%3E%3Crect rx='4' ry='4' x='6' y='4' width='52' height='24' vector-effect='non-scaling-stroke' /%3E%3C/svg%3E");
 			}
 
+            .spotlight .image {
+
+            }
 			#wrapper > .invert .spotlight .image {
 				background-color: rgba(255, 255, 255, 0.125);
 			}

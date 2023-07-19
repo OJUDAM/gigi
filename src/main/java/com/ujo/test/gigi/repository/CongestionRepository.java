@@ -10,6 +10,7 @@ import java.util.List;
 public interface CongestionRepository {
     @Select(" SELECT stat.*, station.STATION_NAME, station.SUBWAY_LINE" +
             " FROM STATION_STAT stat" +
-            " INNER JOIN STATION station ON stat.STATION_CODE = station.STATION_CODE ")
+            " INNER JOIN STATION station ON stat.STATION_CODE = station.STATION_CODE" +
+            " WHERE stat.UP_DN_LINE = 1")
     List<StatAndStationEntity> findAll();
 }

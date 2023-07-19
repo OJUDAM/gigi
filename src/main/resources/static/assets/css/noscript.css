@@ -195,6 +195,9 @@
 	body.is-preload .banner.onload-image-fade-in .image img {
 		opacity: 1;
 	}
+	body.is-preload .banner.onload-image-fade-in .image canvas {
+    		opacity: 1;
+
 
 	.banner.onscroll-content-fade-up .content {
 		-moz-transition: none;
