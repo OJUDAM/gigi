@@ -16,6 +16,7 @@ import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
@@ -59,6 +60,7 @@ public class RequestSettingJobConfiguration {
      * STEP 1.API 요청할 지하철 역 정보 DB 에서 조회하여 REQUEST_STAT 테이블에 저장
      * */
     @Bean
+    @JobScope
     public Step insertRequestSettingStep(){
         return stepBuilderFactory.get("insertRequestSettingStep")
                 .<RequestStatEntity, RequestStatEntity>chunk(CHUNK_SIZE)

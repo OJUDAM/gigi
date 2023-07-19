@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class CustomItemReader<T> implements ItemReader<T>{
 
     private List<T> items;
