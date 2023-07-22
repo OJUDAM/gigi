@@ -19,7 +19,7 @@ public class GigiController {
     @GetMapping("/")
     public String hello(Model model) {
         try {
-            String congestionJsonArray = objectMapper.writeValueAsString(congestionService.getAllCongestion());
+            String congestionJsonArray = objectMapper.writeValueAsString(congestionService.getCongestionByCode("228"));
 
             model.addAttribute("congestions",congestionJsonArray);
 

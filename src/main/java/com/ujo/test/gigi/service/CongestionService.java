@@ -16,4 +16,8 @@ public class CongestionService {
     public List<StatAndStationEntity> getAllCongestion(){
         return congestionRepository.findAll();
     }
+
+    public List<StatAndStationEntity> getCongestionByCode(String stationCode){
+        return congestionRepository.findByCode(stationCode);
+    }
 }
