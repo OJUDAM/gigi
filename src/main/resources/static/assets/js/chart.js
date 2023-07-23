@@ -87,14 +87,6 @@
             });
         }
 
-        function convertJsonToObject(jsonData) {
-            var jsonObject = JSON.stringify(jsonData);
-            return JSON.parse(jsonObject);
-        }
-
-
-        var congestionData = convertJsonToObject(jsonData);
-
         var labelList = new Array();
         var valueList00 = new Array();
         var valueList10 = new Array();
@@ -103,8 +95,10 @@
         var valueList40 = new Array();
         var valueList50 = new Array();
 
-        for(var i = 0; i<congestionData.length; i++) {
-            var congestion = congestionData[i];
+        console.log(jsonData);
+        for(var i = 0; i<jsonData.length; i++) {
+            var congestion = jsonData[i];
+
             labelList.push(congestion.stationName + '(' + congestion.hour+ '시)');
             valueList00.push(congestion.congestionMin00);
             valueList10.push(congestion.congestionMin10);

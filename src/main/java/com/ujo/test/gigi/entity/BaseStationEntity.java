@@ -14,6 +14,7 @@ public class BaseStationEntity {
     protected String stationCode;
     protected String stationName;
     protected String subwayLine;
+    protected int priority;
     protected LocalDateTime createdAt;
     protected LocalDateTime updatedAt;
 }
