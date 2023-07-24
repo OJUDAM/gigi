@@ -6918,9 +6918,9 @@ input, select, textarea {
 			display: block;
 			position: relative;
 			overflow: hidden;
-			width: 30rem;
-			max-width: 75vw;
-			height: 22.5rem;
+			width: 40rem;
+			max-width: 90vw;
+			height: 15.5rem;
 		}
 
 			.gallery.style2 article .image {

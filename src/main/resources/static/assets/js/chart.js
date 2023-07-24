@@ -145,7 +145,7 @@
         //makeChart(ctx, 'doughnut', newLabels, newMyData);
  function resetCanvas() {
    $('#myChart').remove(); // this is my <canvas> element
-   $('#graph-container').append('<canvas id="myChart"></canvas>');
+   $('#graph-container').append('<canvas  height="200" id="myChart"></canvas>');
    $('#myChart2').remove(); // this is my <canvas> element
    $('#graph-container2').append('<canvas width="1000" height="1000" id="myChart2"></canvas>');
 
