@@ -29,7 +29,7 @@ function requestStatAndCount(stationCode) {
     $.ajax({
                 type:'get',
                 async: false,
-                url:'http://localhost:8080/congestion/count',
+                url:'http://www.gigi.p-e.kr/congestion/count',
                 dataType:'json',
                 data:{code:stationCode},
                 success: function(data, textStatus) {
