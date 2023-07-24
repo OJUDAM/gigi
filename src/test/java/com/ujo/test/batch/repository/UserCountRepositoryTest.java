@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class ExitRepositoryTest {
+class UserCountRepositoryTest {
 
     @Autowired
     private ExitRepository exitRepository;

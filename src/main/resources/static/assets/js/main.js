@@ -225,117 +225,231 @@
 				});
 
 		// Lightbox.
-			$('.gallery.lightbox')
-				.on('click', 'a', function(event) {
+		$('.gallery.lightbox')
+            .on('click', 'a', function(event) {
 
-					var $a = $(this),
-						$gallery = $a.parents('.gallery'),
-						$modal = $gallery.children('.modal'),
-						$modalImg = $modal.find('img'),
-						href = $a.attr('href');
+                var $a = $(this),
+                    $gallery = $a.parents('.gallery'),
+                    $modal = $gallery.children('.modal'),
+                    $modalImg = $modal.find('img'),
+                    href = $a.attr('href');
 
-					// Not an image? Bail.
-						if (!href.match(/\.(jpg|jpeg|gif|png|mp4)$/))
-							return;
+                // Not an image? Bail.
+                    if (!href.match(/\.(jpg|jpeg|gif|png|mp4)$/))
+                        return;
 
-					// Prevent default.
-						event.preventDefault();
-						event.stopPropagation();
+                // Prevent default.
+                    event.preventDefault();
+                    event.stopPropagation();
 
-					// Locked? Bail.
-						if ($modal[0]._locked)
-							return;
+                // Locked? Bail.
+                    if ($modal[0]._locked)
+                        return;
 
-					// Lock.
-						$modal[0]._locked = true;
+                // Lock.
+                    $modal[0]._locked = true;
 
-					// Set src.
-						$modalImg.attr('src', href);
+                // Set src.
+                    $modalImg.attr('src', href);
 
-					// Set visible.
-						$modal.addClass('visible');
+                // Set visible.
+                    $modal.addClass('visible');
 
-					// Focus.
-						$modal.focus();
+                // Focus.
+                    $modal.focus();
 
-					// Delay.
-						setTimeout(function() {
+                // Delay.
+                    setTimeout(function() {
 
-							// Unlock.
-								$modal[0]._locked = false;
+                        // Unlock.
+                            $modal[0]._locked = false;
 
-						}, 600);
+                    }, 600);
 
-				})
-				.on('click', '.modal', function(event) {
+            })
+            .on('click', '.modal', function(event) {
 
-					var $modal = $(this),
-						$modalImg = $modal.find('img');
+                var $modal = $(this),
+                    $modalImg = $modal.find('img');
 
-					// Locked? Bail.
-						if ($modal[0]._locked)
-							return;
+                // Locked? Bail.
+                    if ($modal[0]._locked)
+                        return;
 
-					// Already hidden? Bail.
-						if (!$modal.hasClass('visible'))
-							return;
+                // Already hidden? Bail.
+                    if (!$modal.hasClass('visible'))
+                        return;
 
-					// Lock.
-						$modal[0]._locked = true;
+                // Lock.
+                    $modal[0]._locked = true;
 
-					// Clear visible, loaded.
-						$modal
-							.removeClass('loaded')
+                // Clear visible, loaded.
+                    $modal
+                        .removeClass('loaded')
 
-					// Delay.
-						setTimeout(function() {
+                // Delay.
+                    setTimeout(function() {
 
-							$modal
-								.removeClass('visible')
+                        $modal
+                            .removeClass('visible')
 
-							setTimeout(function() {
+                        setTimeout(function() {
 
-								// Clear src.
-									$modalImg.attr('src', '');
+                            // Clear src.
+                                $modalImg.attr('src', '');
 
-								// Unlock.
-									$modal[0]._locked = false;
+                            // Unlock.
+                                $modal[0]._locked = false;
 
-								// Focus.
-									$body.focus();
+                            // Focus.
+                                $body.focus();
 
-							}, 475);
+                        }, 475);
 
-						}, 125);
+                    }, 125);
 
-				})
-				.on('keypress', '.modal', function(event) {
 
-					var $modal = $(this);
 
-					// Escape? Hide modal.
-						if (event.keyCode == 27)
-							$modal.trigger('click');
+            })
+            .on('keypress', '.modal', function(event) {
 
-				})
-				.prepend('<div class="modal" tabIndex="-1"><div class="inner"><img src="" /></div></div>')
-					.find('img')
-						.on('load', function(event) {
+                var $modal = $(this);
 
-							var $modalImg = $(this),
-								$modal = $modalImg.parents('.modal');
+                // Escape? Hide modal.
+                    if (event.keyCode == 27)
+                        $modal.trigger('click');
 
-							setTimeout(function() {
+            })
+            .prepend('<div class="modal" tabIndex="-1"><div class="inner" id="graph-container2"><canvas id="myChart2"></canvas></div><img width="0" height="0" id="tempImg" src="" /></div>')
+                .find('img')
+                    .on('load', function(event) {
 
-								// No longer visible? Bail.
-									if (!$modal.hasClass('visible'))
-										return;
+                        var $modalImg = $(this),
+                            $modal = $modalImg.parents('.modal');
 
-								// Set loaded.
-									$modal.addClass('loaded');
+                        setTimeout(function() {
 
-							}, 275);
+                             //No longer visible? Bail.
+                                if (!$modal.hasClass('visible'))
+                                    return;
 
-						});
+                            // Set loaded.
+                                $modal.addClass('loaded');
+                        }, 275);
+
+
+                    });
+//			$('.gallery.lightbox')
+//				.on('click', 'a', function(event) {
+//
+//					var $a = $(this),
+//						$gallery = $a.parents('.gallery'),
+//						$modal = $gallery.children('.modal'),
+//						$modalImg = $modal.find('img'),
+//						href = $a.attr('href');
+//
+//					// Not an image? Bail.
+//						if (!href.match(/\.(jpg|jpeg|gif|png|mp4)$/))
+//							return;
+//
+//					// Prevent default.
+//						event.preventDefault();
+//						event.stopPropagation();
+//
+//					// Locked? Bail.
+//						if ($modal[0]._locked)
+//							return;
+//
+//					// Lock.
+//						$modal[0]._locked = true;
+//
+//					// Set src.
+//						$modalImg.attr('src', href);
+//
+//					// Set visible.
+//						$modal.addClass('visible');
+//
+//					// Focus.
+//						$modal.focus();
+//
+//					// Delay.
+//						setTimeout(function() {
+//
+//							// Unlock.
+//								$modal[0]._locked = false;
+//
+//						}, 600);
+//
+//				})
+//				.on('click', '.modal', function(event) {
+//
+//					var $modal = $(this),
+//						$modalImg = $modal.find('img');
+//
+//					// Locked? Bail.
+//						if ($modal[0]._locked)
+//							return;
+//
+//					// Already hidden? Bail.
+//						if (!$modal.hasClass('visible'))
+//							return;
+//
+//					// Lock.
+//						$modal[0]._locked = true;
+//
+//					// Clear visible, loaded.
+//						$modal
+//							.removeClass('loaded')
+//
+//					// Delay.
+//						setTimeout(function() {
+//
+//							$modal
+//								.removeClass('visible')
+//
+//							setTimeout(function() {
+//
+//								// Clear src.
+//									$modalImg.attr('src', '');
+//
+//								// Unlock.
+//									$modal[0]._locked = false;
+//
+//								// Focus.
+//									$body.focus();
+//
+//							}, 475);
+//
+//						}, 125);
+//
+//				})
+//				.on('keypress', '.modal', function(event) {
+//
+//					var $modal = $(this);
+//
+//					// Escape? Hide modal.
+//						if (event.keyCode == 27)
+//							$modal.trigger('click');
+//
+//				})
+//				.prepend('<div class="modal" tabIndex="-1"><div class="inner"><img src="" /></div></div>')
+//					.find('img')
+//						.on('load', function(event) {
+//
+//							var $modalImg = $(this),
+//								$modal = $modalImg.parents('.modal');
+//
+//							setTimeout(function() {
+//
+//								// No longer visible? Bail.
+//									if (!$modal.hasClass('visible'))
+//										return;
+//
+//								// Set loaded.
+//									$modal.addClass('loaded');
+//
+//							}, 275);
+//
+//						});
 
 })(jQuery);

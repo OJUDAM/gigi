@@ -1,5 +1,5 @@
 
- function showChart(jsonData) {
+ function showChart(jsonData, chartId) {
         //그래프 색상
         var backColor = [
             'rgba(255, 99, 132, 0.2)',
@@ -7,7 +7,8 @@
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(230, 235, 152, 0.2)'
             ]
         //그래프 가장자리 색상
         var borderColor=[
@@ -16,7 +17,8 @@
            'rgba(255, 206, 86, 1)',
            'rgba(75, 192, 192, 1)',
            'rgba(153, 102, 255, 1)',
-           'rgba(255, 159, 64, 1)'
+           'rgba(255, 159, 64, 1)',
+           'rgba(230, 235, 152, 1)'
            ]
         function randomColor(labels) {
             var colors = [];
@@ -25,7 +27,7 @@
             }
             return colors;
         }
-        function makeChart(ctx, type, labels, data00, data10, data20, data30, data40, data50) {
+        function makeChart(ctx, type, labels, data00, data10, data20, data30, data40, data50, userCount) {
             var myChart = new Chart(ctx, {
                 type: type,
                 data: {
@@ -71,6 +73,14 @@
                         backgroundColor: backColor[5],
                         borderColor: borderColor[5],
                         borderWidth: 1 //경계선 굵기
+                    },
+                    {
+                         label: '이용자 수',
+                         type: 'line',
+                         data: userCount,
+                        backgroundColor: backColor[6],
+                        borderColor: borderColor[6],
+                        borderWidth: 1 //경계선 굵기
                     }
                     ]
                 },
@@ -94,6 +104,7 @@
         var valueList30 = new Array();
         var valueList40 = new Array();
         var valueList50 = new Array();
+        var lineValue = new Array();
 
         console.log(jsonData);
         for(var i = 0; i<jsonData.length; i++) {
@@ -106,6 +117,7 @@
             valueList30.push(congestion.congestionMin30);
             valueList40.push(congestion.congestionMin40);
             valueList50.push(congestion.congestionMin50);
+            lineValue.push(congestion.userCountPerHour);
         }
 
         var newLabels = labelList.slice(-5);
@@ -116,9 +128,12 @@
         var newMyData40 = valueList40.slice(-5);
         var newMyData50 = valueList50.slice(-5);
 
+        resetCanvas();
         // Chart.js 막대그래프 그리기
-        var ctx = $('#myChart');
-        makeChart(ctx, 'bar', newLabels, newMyData00, newMyData10, newMyData20, newMyData30, newMyData40, newMyData50);
+        var ctx = $('#' +chartId);
+        var ctx2 = $('#myChart2');
+        makeChart(ctx, 'bar', newLabels, newMyData00, newMyData10, newMyData20, newMyData30, newMyData40, newMyData50, lineValue);
+        makeChart(ctx2, 'bar', newLabels, newMyData00, newMyData10, newMyData20, newMyData30, newMyData40, newMyData50, lineValue);
 
        // Chart.js 선그래프 그리기
         //ctx = $('#myChart2');
@@ -128,4 +143,11 @@
         //makeChart(ctx, 'pie', newLabels, newMyData);
         //ctx = $('#myChart4');
         //makeChart(ctx, 'doughnut', newLabels, newMyData);
+ function resetCanvas() {
+   $('#myChart').remove(); // this is my <canvas> element
+   $('#graph-container').append('<canvas id="myChart"></canvas>');
+   $('#myChart2').remove(); // this is my <canvas> element
+   $('#graph-container2').append('<canvas width="1000" height="1000" id="myChart2"></canvas>');
+
+ };
 };

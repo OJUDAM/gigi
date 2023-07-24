@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
 $(function() {
-    showChart(${congestions})
+    showChart(${congestions}, 'myChart')
 });
 
 function requestStat(stationCode) {
@@ -17,7 +17,24 @@ function requestStat(stationCode) {
                 data:{code:stationCode},
                 success: function(data, textStatus) {
                     if(data !== 'null') {
-                       showChart(data);
+                       showChart(data,'myChart');
+                    }
+                },
+                error:function (data, textStatus) {
+                    console.log('error');
+                }
+    })
+}
+function requestStatAndCount(stationCode) {
+    $.ajax({
+                type:'get',
+                async: false,
+                url:'http://localhost:8080/congestion/count',
+                dataType:'json',
+                data:{code:stationCode},
+                success: function(data, textStatus) {
+                    if(data !== 'null') {
+                       showChart(data,'myChart');
                     }
                 },
                 error:function (data, textStatus) {
@@ -26,20 +43,33 @@ function requestStat(stationCode) {
     })
 }
 </script>
-<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="graph">
-    <div class="content">
+<section class="wrapper style1 align-center" id="graph">
+            <div class="inner" id="graph-container">
+                 <canvas id="myChart"></canvas>
+            </div>
+    <div class="gallery style2 medium lightbox onscroll-fade-in">
+            <c:forEach var="subway" items="${metaInfo}">
+            <article>
+                <a href="images/gallery/fulls/01.jpg" class="image">
+                    <img src="images/gallery/thumbs/01.jpg" alt="" />
+                </a>
+                <div class="caption">
+                    <ul class="icons fixed">
+                        <c:forEach var="station" items="${subway.value}">
+                            <li><a onclick="requestStatAndCount(${station.stationCode})" class="button small">${station.stationName}</a></li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </article>
+        </c:forEach>
+
+<!--
         <h2>지하철 혼잡도 통계 그래프</h2>
         <p>주요 역 정보입니다.</p>
+        </div>
+            <div class="image" id="graph-container">
+                <canvas id="myChart"></canvas>
+            </div>
+-->
 
-         <ul class="actions stacked">
-            <c:forEach var="station" items="${metaInfo}">
-                <li><a onclick="requestStat(${station.stationCode})" class="button">${station.stationName}</a></li>
-                <li><a href="#" class="button">Learn More</a></li>
-            </c:forEach>
-         </ul>
-
-    </div>
-    <div class="image">
-        <canvas id="myChart"></canvas>
-    </div>
 </section>
