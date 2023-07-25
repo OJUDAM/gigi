@@ -17,4 +17,9 @@ public interface CongestionCountRepository {
             " FROM CONGESTION_COUNT_VIEW" +
             " GROUP BY STATION_CODE")
     List<CongestionCountEntity> findStation();
+
+    @Select(" SELECT a.STATION_CODE, a.STATION_NAME, a.SUBWAY_LINE" +
+            " FROM CONGESTION_COUNT_VIEW a INNER JOIN STATION_BUNDANG_LINE b ON b.RELATIVE_STATION = a.STATION_CODE" +
+            " GROUP BY STATION_CODE")
+    List<CongestionCountEntity> findBundangStation();
 }

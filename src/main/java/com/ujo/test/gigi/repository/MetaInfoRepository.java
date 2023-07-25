@@ -13,4 +13,5 @@ public interface MetaInfoRepository {
     @Select(" SELECT * FROM STATION" +
             " WHERE priority = #{priority}")
     List<BaseStationEntity> findByPriority(@Param("priority") int priority);
+
 }

@@ -63,13 +63,4 @@ function requestStatAndCount(stationCode) {
             </article>
         </c:forEach>
 
-<!--
-        <h2>지하철 혼잡도 통계 그래프</h2>
-        <p>주요 역 정보입니다.</p>
-        </div>
-            <div class="image" id="graph-container">
-                <canvas id="myChart"></canvas>
-            </div>
--->
-
 </section>

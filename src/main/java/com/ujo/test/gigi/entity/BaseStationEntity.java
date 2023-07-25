@@ -10,11 +10,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class BaseStationEntity {
+public class BaseStationEntity extends BaseDateEntity{
     protected String stationCode;
     protected String stationName;
     protected String subwayLine;
     protected int priority;
-    protected LocalDateTime createdAt;
-    protected LocalDateTime updatedAt;
 }

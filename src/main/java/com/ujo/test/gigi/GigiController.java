@@ -37,13 +37,11 @@ public class GigiController {
             String congestionJsonArray = objectMapper.writeValueAsString(congestionService.getCongestionByCode("226"));
 
             //지하철 주요 역 정보 가져 온후 Entity -> DTO 변환
-            Map<String, List<MetaInfoResponseDTO>> stationMap = congestionService.getStationList();
-            List<String> subwayLineList = new ArrayList<>(stationMap.keySet());
+            Map<String, List<MetaInfoResponseDTO>> stationMap = metaInfoService.getStationList();
 
             //뷰에 전달
             model.addAttribute("congestions",congestionJsonArray);
             model.addAttribute("metaInfo", stationMap);
-            model.addAttribute("subwayLine", subwayLineList);
 
             return "index";
         } catch (JsonProcessingException e) {
