@@ -28,7 +28,7 @@ public class MetaInfoService {
         Map<String, List<MetaInfoResponseDTO>> stationMap = new TreeMap<>();
 
         //주요 역 정보 담음
-        stationMap.put("0분당선", congestionCountRepository.findBundangStation()
+        stationMap.put("0주요역", metaInfoRepository.findByPriority(1)
                 .stream().map(MetaInfoResponseDTO::new)
                 .collect(Collectors.toList()));
 

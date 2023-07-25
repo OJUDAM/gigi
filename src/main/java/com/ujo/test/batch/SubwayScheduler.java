@@ -48,6 +48,9 @@ public class SubwayScheduler {
         this.runJob("Start-Exit-Batch", exitJobConfiguration.exitJob());
     }
 
+
+/*
+    //주요 역들만 매일 배치
    //@Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 35 2 * * *")
     public void runRequestSettingJob(){
@@ -59,10 +62,10 @@ public class SubwayScheduler {
 //    @Scheduled(cron = "0 8 17 * * *")
      @Scheduled(cron = "0 55 2 * * *")
     public void runResetSettingJob(){
-        //지하철 역 이용 통계 자료 입력 배치
+        //puzzle API 요청 파라미터 삭제 배치
         this.runJob("Start-Reset-Setting-Batch", resetSettingJobConfiguration.resetSettingJob());
     }
-
+*/
     private void runJob(String message, Job job){
         //job parameter 설정
         JobParameters jobParameters = new JobParametersBuilder()
