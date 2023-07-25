@@ -22,7 +22,7 @@ public class ExitMapper extends BaseMapper {
     @Override
     public Map<String, Object> jsonToMap(String jsonString) {
         try{
-            String dateBeforeWeek = DateUtils.addDate("yyyyMMdd", StatConstant.EXIT_PREV_DAYS);
+            //String dateBefore = DateUtils.addDate("yyyyMMdd", StatConstant.EXIT_PREV_DAYS);
 
             CustomJSONParser jsonParser = new CustomJSONParser();
             JSONObject jsonObject = jsonParser.parse(jsonString);
@@ -52,7 +52,10 @@ public class ExitMapper extends BaseMapper {
                 }
 
                 int userCount = Integer.parseInt(raw.get("userCount").toString());
-                if (!datetime.equals(dateBeforeWeek + "170000") && !datetime.equals(dateBeforeWeek + "180000") && !datetime.equals(dateBeforeWeek + "190000")) {
+
+                String dateBefore = datetime.substring(0, 8);
+
+                if (!datetime.equals(dateBefore + "170000") && !datetime.equals(dateBefore + "180000") && !datetime.equals(dateBefore + "190000")) {
                     continue;
                 }
 
@@ -62,7 +65,7 @@ public class ExitMapper extends BaseMapper {
                     countMap.put(userCountKey, (int)countMap.get(userCountKey) + userCount);
                     continue;
                 }
-                countMap.put("date", dateBeforeWeek);
+                countMap.put("date", dateBefore);
                 countMap.put(userCountKey, userCount);
             }
 

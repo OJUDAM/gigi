@@ -7,6 +7,6 @@ public final class StatConstant {
     public static final String[] STAT_TIME_2_HOUR = {"18", "19"};
     public static final String[] STAT_TIME_3_HOUR = {"17", "18", "19"};
 
-    public static final int EXIT_PREV_DAYS = -7;
+    public static final int EXIT_PREV_DAYS = -1;
 
 }
