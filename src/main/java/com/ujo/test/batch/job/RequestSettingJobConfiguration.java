@@ -1,18 +1,16 @@
 package com.ujo.test.batch.job;
 
-import com.ujo.test.batch.entity.*;
-import com.ujo.test.batch.repository.RequestStatRepository;
+import com.ujo.test.batch.entity.RequestStatEntity;
+import com.ujo.test.batch.entity.RequestStatMapper;
+import com.ujo.test.batch.entity.StationEntity;
 import com.ujo.test.batch.repository.StationRepository;
 import com.ujo.test.common.constants.StatConstant;
 import com.ujo.test.common.utils.DateUtils;
-import com.ujo.test.common.utils.StringUtils;
-import com.ujo.test.common.utils.apiUtils.PuzzleApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.mybatis.spring.batch.MyBatisPagingItemReader;
-import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -21,8 +19,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.support.CompositeItemProcessor;
-import org.springframework.batch.item.support.CompositeItemWriter;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

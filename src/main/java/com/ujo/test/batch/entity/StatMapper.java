@@ -7,7 +7,6 @@ import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 

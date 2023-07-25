@@ -1,7 +1,8 @@
 package com.ujo.test.gigi.dto.response;
 
 import com.ujo.test.gigi.entity.StatAndStationEntity;
-import lombok.*;
+import lombok.Getter;
+import lombok.ToString;
 
 @ToString
 @Getter

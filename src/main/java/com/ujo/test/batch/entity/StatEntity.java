@@ -1,7 +1,6 @@
 package com.ujo.test.batch.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

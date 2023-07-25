@@ -1,17 +1,15 @@
 package com.ujo.test.common.utils.apiUtils;
 
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.batch.entity.ExitEntity;
-import com.ujo.test.common.utils.DateUtils;
-import com.ujo.test.common.utils.StringUtils;
-import com.ujo.test.common.utils.jsonUtils.CommonJSON;
-import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
 import com.ujo.test.batch.entity.StatEntity;
 import com.ujo.test.batch.entity.StatMapper;
 import com.ujo.test.batch.entity.StationEntity;
+import com.ujo.test.common.utils.DateUtils;
+import com.ujo.test.common.utils.jsonUtils.CommonJSON;
+import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -22,8 +20,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @ExtendWith(MockitoExtension.class)

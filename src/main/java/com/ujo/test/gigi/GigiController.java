@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.gigi.dto.response.CongestionAndExitCountResponseDTO;
 import com.ujo.test.gigi.dto.response.CongestionResponseDTO;
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
-import com.ujo.test.gigi.entity.BaseStationEntity;
 import com.ujo.test.gigi.entity.CongestionCountEntity;
 import com.ujo.test.gigi.entity.StatAndStationEntity;
 import com.ujo.test.gigi.service.CongestionService;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

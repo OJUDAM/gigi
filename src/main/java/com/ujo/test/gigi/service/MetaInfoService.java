@@ -1,6 +1,5 @@
 package com.ujo.test.gigi.service;
 
-import com.ujo.test.gigi.dto.response.CongestionResponseDTO;
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
 import com.ujo.test.gigi.entity.BaseStationEntity;
 import com.ujo.test.gigi.entity.CongestionCountEntity;
@@ -9,7 +8,10 @@ import com.ujo.test.gigi.repository.MetaInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service

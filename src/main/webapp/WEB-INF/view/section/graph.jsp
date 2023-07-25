@@ -51,7 +51,7 @@ function requestStatAndCount(stationCode) {
             <c:forEach var="subway" items="${metaInfo}">
             <article>
                 <a href="images/gallery/fulls/01.jpg" class="image">
-                    <img src="images/gallery/thumbs/01.jpg" alt="" />
+                    <img src="images/gallery/line_${subway.key}.png" alt="" />
                 </a>
                 <div class="caption">
                     <ul class="icons fixed">

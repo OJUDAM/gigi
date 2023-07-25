@@ -2,9 +2,6 @@ package com.ujo.test.batch.job;
 
 import com.ujo.test.batch.entity.ExitEntity;
 import com.ujo.test.batch.entity.ExitMapper;
-import com.ujo.test.batch.entity.StatEntity;
-import com.ujo.test.batch.entity.StatMapper;
-import com.ujo.test.batch.repository.ExitRepository;
 import com.ujo.test.batch.repository.RequestStatRepository;
 import com.ujo.test.common.utils.apiUtils.PuzzleApi;
 import lombok.RequiredArgsConstructor;

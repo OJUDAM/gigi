@@ -1,21 +1,12 @@
 package com.ujo.test.batch.entity;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.common.constants.StatConstant;
 import com.ujo.test.common.exception.BusinessException;
 import com.ujo.test.common.exception.ErrorCode;
-import com.ujo.test.common.utils.jsonUtils.CommonJSON;
-import com.ujo.test.common.utils.jsonUtils.CustomJSONParser;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class RequestStatMapper extends BaseMapper{
