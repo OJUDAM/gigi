@@ -13,6 +13,7 @@ function requestStat(stationCode) {
                 type:'get',
                 async: false,
                 url:'http://www.gigi.p-e.kr/congestion',
+                //url:'http://localhost:8080/congestion',
                 dataType:'json',
                 data:{code:stationCode},
                 success: function(data, textStatus) {
@@ -30,6 +31,7 @@ function requestStatAndCount(stationCode) {
                 type:'get',
                 async: false,
                 url:'http://www.gigi.p-e.kr/congestion/count',
+                //url:'http://localhost:8080/congestion/count',
                 dataType:'json',
                 data:{code:stationCode},
                 success: function(data, textStatus) {
@@ -56,7 +58,7 @@ function requestStatAndCount(stationCode) {
                 <div class="caption">
                     <ul class="icons fixed">
                         <c:forEach var="station" items="${subway.value}">
-                            <li><a onclick="requestStatAndCount(${station.stationCode})" class="button small">${station.stationName}</a></li>
+                            <li><a onclick="requestStatAndCount('${station.stationCode}')" class="button small">${station.stationName}</a></li>
                         </c:forEach>
                     </ul>
                 </div>

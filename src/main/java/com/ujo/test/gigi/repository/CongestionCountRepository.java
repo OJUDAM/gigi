@@ -10,7 +10,9 @@ import java.util.List;
 @Mapper
 public interface CongestionCountRepository {
     @Select(" SELECT * FROM CONGESTION_COUNT_VIEW" +
-            " WHERE STATION_CODE = #{code}")
+            " WHERE STATION_CODE = #{code}" +
+            " ORDER BY USER_COUNT_DATE DESC, HOUR ASC" +
+            " LIMIT 6")
     List<CongestionCountEntity> findAllByCode(@Param("code") String code);
 
     @Select(" SELECT STATION_CODE, STATION_NAME, SUBWAY_LINE" +

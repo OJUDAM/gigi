@@ -306,6 +306,11 @@
 										<label for="email">Email</label>
 										<input type="email" name="email" id="email" value="" />
 									</div>
+									</div>
+                                    <div class="field">
+                                        <label for="message">Time</label>
+                                        <input type="time" name="time" id="time" value="" />
+                                    </div>
 									<div class="field">
 										<label for="message">Message</label>
 										<textarea name="message" id="message" rows="6"></textarea>

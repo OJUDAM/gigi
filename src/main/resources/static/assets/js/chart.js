@@ -82,6 +82,7 @@
                         borderColor: borderColor[6],
                         borderWidth: 1 //경계선 굵기
                     }
+
                     ]
                 },
                 options: {
@@ -110,7 +111,7 @@
         for(var i = 0; i<jsonData.length; i++) {
             var congestion = jsonData[i];
 
-            labelList.push(congestion.stationName + '(' + congestion.hour+ '시)');
+            labelList.push('[' + congestion.day+ ']' + congestion.stationName + '(' + congestion.hour+ '시/' + congestion.directAt + ')');
             valueList00.push(congestion.congestionMin00);
             valueList10.push(congestion.congestionMin10);
             valueList20.push(congestion.congestionMin20);
@@ -118,15 +119,16 @@
             valueList40.push(congestion.congestionMin40);
             valueList50.push(congestion.congestionMin50);
             lineValue.push(congestion.userCountPerHour);
+
         }
 
-        var newLabels = labelList.slice(-5);
-        var newMyData00 = valueList00.slice(-5);
-        var newMyData10 = valueList10.slice(-5);
-        var newMyData20 = valueList20.slice(-5);
-        var newMyData30 = valueList30.slice(-5);
-        var newMyData40 = valueList40.slice(-5);
-        var newMyData50 = valueList50.slice(-5);
+        var newLabels = labelList.slice(-6);
+        var newMyData00 = valueList00.slice(-6);
+        var newMyData10 = valueList10.slice(-6);
+        var newMyData20 = valueList20.slice(-6);
+        var newMyData30 = valueList30.slice(-6);
+        var newMyData40 = valueList40.slice(-6);
+        var newMyData50 = valueList50.slice(-6);
 
         resetCanvas();
         // Chart.js 막대그래프 그리기
