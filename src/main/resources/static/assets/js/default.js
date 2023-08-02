@@ -15,7 +15,8 @@ function setArrivalTime(){
 
     $.ajax({
         type : 'post',
-        url : 'http://localhost:8080/bundang-line',
+        url:'http://www.gigi.p-e.kr/bundang-line',
+        //url : 'http://localhost:8080/bundang-line',
         data : queryString,
         dataType : 'json',
         error: function(xhr, status, error){
