@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ArrivalRepository {
 
     @Insert(" INSERT INTO STATION_ARRIVAL (STATION_CODE, ARRIVAL_YEAR, ARRIVAL_MONTH" +
-            " , ARRIVAL_DAY, ARRIVAL_TIME)" +
+            " , ARRIVAL_DAY, ARRIVAL_TIME, MESSAGE)" +
             " VALUES(#{stationCode}, #{arrivalYear}, #{arrivalMonth}" +
-            " , #{arrivalDay}, #{arrivalTime})")
+            " , #{arrivalDay}, #{arrivalTime}, #{message})")
     int save(ArrivalEntity arrivalEntity);
 
 

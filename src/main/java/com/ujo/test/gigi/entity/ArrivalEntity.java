@@ -18,5 +18,5 @@ public class ArrivalEntity extends BaseDateEntity{
     private String arrivalDay;
     private String arrivalTime;
     private String delayTime;
-
+    private String message;
 }
