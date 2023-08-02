@@ -2,7 +2,9 @@ package com.ujo.test.gigi.service;
 
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
 import com.ujo.test.gigi.entity.BaseStationEntity;
+import com.ujo.test.gigi.entity.BundangLineEntity;
 import com.ujo.test.gigi.entity.CongestionCountEntity;
+import com.ujo.test.gigi.repository.BundangLineRepository;
 import com.ujo.test.gigi.repository.CongestionCountRepository;
 import com.ujo.test.gigi.repository.MetaInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,16 @@ public class MetaInfoService {
 
     private final MetaInfoRepository metaInfoRepository;
     private final CongestionCountRepository congestionCountRepository;
+    private final BundangLineRepository bundangLineRepository;
+
 
     public List<BaseStationEntity> getPrimaryStation(){
         return metaInfoRepository.findByPriority(1);
     }
 
+    public List<BundangLineEntity> getBundangLineList(){
+        return bundangLineRepository.findAll();
+    }
     public Map<String, List<MetaInfoResponseDTO>> getStationList() {
         //호선 마다 나누기 위해 맵 성성
         Map<String, List<MetaInfoResponseDTO>> stationMap = new TreeMap<>();

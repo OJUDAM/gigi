@@ -11,6 +11,7 @@ public class CongestionAndExitCountResponseDTO {
     private String stationName;
     private String hour;
     private String day;
+    private int userCountDate;
     private String directAt;
     private int congestionMin00;
     private int congestionMin10;
@@ -25,6 +26,7 @@ public class CongestionAndExitCountResponseDTO {
         this.stationName = congestionCountEntity.getStationName();
         this.hour = congestionCountEntity.getHour();
         this.day = congestionCountEntity.getDay();
+        this.userCountDate=congestionCountEntity.getUserCountDate();
         this.directAt = "일반";
         if(congestionCountEntity.getDirectAt() == 1) {
             this.directAt = "급행";

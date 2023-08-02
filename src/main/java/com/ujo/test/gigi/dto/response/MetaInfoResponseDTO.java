@@ -1,6 +1,7 @@
 package com.ujo.test.gigi.dto.response;
 
 import com.ujo.test.gigi.entity.BaseStationEntity;
+import com.ujo.test.gigi.entity.BundangLineEntity;
 import com.ujo.test.gigi.entity.CongestionCountEntity;
 import lombok.Getter;
 import lombok.ToString;
@@ -21,5 +22,11 @@ public class MetaInfoResponseDTO {
         this.stationCode = congestionCountEntity.getStationCode();
         this.stationName = congestionCountEntity.getStationName();
         this.subwayLine = congestionCountEntity.getSubwayLine();
+    }
+
+    public MetaInfoResponseDTO(BundangLineEntity bundangLineEntity) {
+        this.stationCode = bundangLineEntity.getStationCode();
+        this.stationName = bundangLineEntity.getStationName();
+        this.subwayLine = "신분당선";
     }
 }

@@ -2,17 +2,22 @@ package com.ujo.test.gigi;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ujo.test.gigi.dto.request.ArrivalTimeRequestDTO;
 import com.ujo.test.gigi.dto.response.CongestionAndExitCountResponseDTO;
 import com.ujo.test.gigi.dto.response.CongestionResponseDTO;
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
+import com.ujo.test.gigi.entity.BundangLineEntity;
 import com.ujo.test.gigi.entity.CongestionCountEntity;
 import com.ujo.test.gigi.entity.StatAndStationEntity;
+import com.ujo.test.gigi.service.ArrivalService;
 import com.ujo.test.gigi.service.CongestionService;
 import com.ujo.test.gigi.service.MetaInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -26,7 +31,7 @@ public class GigiController {
     private final CongestionService congestionService;
     private final MetaInfoService metaInfoService;
     private final ObjectMapper objectMapper;
-
+    private final ArrivalService arrivalService;
 
     @GetMapping("/")
     public String hello(Model model) {
@@ -37,10 +42,13 @@ public class GigiController {
             //지하철 주요 역 정보 가져 온후 Entity -> DTO 변환
             Map<String, List<MetaInfoResponseDTO>> stationMap = metaInfoService.getStationList();
 
+            //분당선 리스트
+            List<BundangLineEntity> bundangLineList = metaInfoService.getBundangLineList();
+
             //뷰에 전달
             model.addAttribute("congestions",congestionJsonArray);
             model.addAttribute("metaInfo", stationMap);
-
+            model.addAttribute("bundangLine", bundangLineList.stream().map(MetaInfoResponseDTO::new).collect(Collectors.toList()));
             return "index";
         } catch (JsonProcessingException e) {
             //TODO: json 예외처리
@@ -62,6 +70,11 @@ public class GigiController {
 
         List<CongestionCountEntity> congestionCountEntities = congestionService.getCongestionAndExitCount(code);
         return congestionCountEntities.stream().map(CongestionAndExitCountResponseDTO::new).collect(Collectors.toList());
+    }
+
+    @PostMapping("/bundang-line")
+    public void setArrivalTime(ArrivalTimeRequestDTO arrivalTime) {
+        arrivalService.setArrivalTime(arrivalTime);
     }
 
 }
