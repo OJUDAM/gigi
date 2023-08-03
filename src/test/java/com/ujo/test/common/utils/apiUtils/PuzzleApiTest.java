@@ -85,10 +85,10 @@ class PuzzleApiTest {
     void requestExitTest() throws ParseException, JsonProcessingException {
 
 
-        String dateBeforeWeek = DateUtils.addDate("yyyyMMdd",-7);
+        String dateBeforeWeek = DateUtils.addDate("yyyyMMdd",-1);
 
         CustomJSONParser jsonParser = new CustomJSONParser();
-        JSONObject jsonObject = jsonParser.parse(puzzleApi.callExitApi("D12",dateBeforeWeek));
+        JSONObject jsonObject = jsonParser.parse(puzzleApi.callExitApi("D12","latest"));
 
         CommonJSON.CommonJSONBuilder commonJSONBuilder =  new CommonJSON.CommonJSONBuilder(jsonObject)
                 .parseObject("status");

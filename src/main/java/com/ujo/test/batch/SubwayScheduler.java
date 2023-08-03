@@ -35,14 +35,14 @@ public class SubwayScheduler {
     }
 
     //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 40 9 * * *")
+    @Scheduled(cron = "0 40 10 * * *")
     public void runStatJob(){
         //지하철 역 이용 통계 자료 입력 배치
         this.runJob("Start-Stat-Batch", statJobConfiguration.statJob());
     }
 
     //@Scheduled(cron = "0 * * * * *")
-    @Scheduled(cron = "0 50 9 * * *")
+    @Scheduled(cron = "0 50 10 * * *")
     public void runExitJob(){
         //지하철 역 정보 입력 배치
         this.runJob("Start-Exit-Batch", exitJobConfiguration.exitJob());
