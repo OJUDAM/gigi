@@ -31,11 +31,11 @@ public class SubwayScheduler {
     @Autowired
     private ArrivalRealTimeConfiguration arrivalRealTimeConfiguration;
 
-    @Scheduled(cron = "0/5 * 12-23 * * *")
-    public void runArrivalRealTimeJob(){
-        //실시간 도착 정보 저장
-        this.runJob("Start-Arrival-RealTIme-Batch", arrivalRealTimeConfiguration.realTimeJob());
-    }
+//    @Scheduled(cron = "0/5 * 12-23 * * *")
+//    public void runArrivalRealTimeJob(){
+//        //실시간 도착 정보 저장
+//        this.runJob("Start-Arrival-RealTIme-Batch", arrivalRealTimeConfiguration.realTimeJob());
+//    }
 
     @Scheduled(cron = "0 30 2 11 * *")
     public void runStationJob(){
