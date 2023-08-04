@@ -16,7 +16,7 @@ public interface ArrivalRealTimeBatchRepository {
             " , #{arrivalMessage}, #{targetStationCode}, #{arrivalCode}" +
             " , #{directAt}, #{upDnLine}, #{arrivalDate}, #{createdAt} )" +
             " ON DUPLICATE KEY UPDATE UPDATED_AT = NOW(), ARRIVAL_MESSAGE = #{arrivalMessage}" +
-            " , ARRIVAL_STATION_CODE = #{arrivalCode}, ARRIVAL_DATE,CREATED_AT = #{createdAt}")
+            " , ARRIVAL_STATION_CODE = #{arrivalCode}, CREATED_AT = #{createdAt}")
 
     int save(ArrivalRealTimeEntity arrivalRealTimeEntity);
 }
