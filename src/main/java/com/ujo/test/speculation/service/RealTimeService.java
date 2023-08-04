@@ -17,15 +17,15 @@ public class RealTimeService {
 //    public SseEmitter getChangedValue() {
 //
 //    }
-//
-//    private void sendToClient(SseEmitter emitter, String id, Object data) {
-//        try {
-//            emitter.send(SseEmitter.event()
-//                    .id(id)
-//                    .name("sse")
-//                    .data(data));
-//        } catch (IOException exception) {
-//            throw new RuntimeException("연결 오류!");
-//        }
-//    }
+
+    private void sendToClient(SseEmitter emitter, String id, Object data) {
+        try {
+            emitter.send(SseEmitter.event()
+                    .id(id)
+                    .name("sse")
+                    .data(data));
+        } catch (IOException exception) {
+            throw new RuntimeException("연결 오류!");
+        }
+    }
 }
