@@ -2,6 +2,9 @@ package com.ujo.test.common.utils.apiUtils;
 
 import com.ujo.test.common.utils.StringUtils;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class CommonUrl {
     private String url;
 
@@ -22,7 +25,7 @@ public class CommonUrl {
 
         public UrlBuilder setPathParam(String pathParam) {
             //https://~~~.../ 마지막은 슬래쉬로 끝
-            this.url += pathParam + "/";
+            this.url += URLEncoder.encode(pathParam, StandardCharsets.UTF_8) + "/";
 
             return this;
         }
