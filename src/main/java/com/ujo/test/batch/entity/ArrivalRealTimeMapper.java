@@ -62,9 +62,9 @@ public class ArrivalRealTimeMapper {
                 realTimeMap.put("targetStationCode", BundangLine.valueOfName(targetStation).code());
                 realTimeMap.put("directAt", TrainDirectInfo.valueOfMessage(direct).code());
                 realTimeMap.put("arrivalCode", arrivalCode);
+                realTimeMap.put("arrivalDate", DateUtils.addDate("yyyyMMdd",0));
                 realTimeMap.put("createdAt", createTime);
                 realTimeMap.put("upDnLine", TrainUpDownInfo.valueOfMessage(updnLine).code());
-
                 //MAP -> ENTITY 변환 후 리스트에 추가
                 realTimeList.add(ArrivalRealTimeEntity.from(realTimeMap));
             }

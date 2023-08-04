@@ -20,6 +20,7 @@ public class ArrivalRealTimeEntity extends BaseEntity {
     private int arrivalCode;
     private int directAt;
     private int upDnLine;
+    private String arrivalDate;
 
     public static ArrivalRealTimeEntity from(Map<String, Object> realTimeMap) {
         ObjectMapper mapper = new ObjectMapper();
