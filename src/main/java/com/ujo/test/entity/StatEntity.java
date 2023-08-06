@@ -1,13 +1,16 @@
-package com.ujo.test.gigi.entity;
+package com.ujo.test.entity;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Map;
+
 @Getter
 @Setter
 @ToString
-public class StatAndStationEntity extends BaseStationEntity{
+public class StatEntity extends BaseEntity{
 
     private String stationCode;
     private String day;
@@ -25,4 +28,9 @@ public class StatAndStationEntity extends BaseStationEntity{
     private String endStationCode;
     private String startDate;
     private String endDate;
+
+    public static StatEntity from(Map<String, Object> statMap) {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(statMap, StatEntity.class);
+    }
 }

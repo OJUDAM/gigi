@@ -1,7 +1,7 @@
 package com.ujo.test.gigi.repository;
 
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
-import com.ujo.test.gigi.entity.BaseStationEntity;
+import com.ujo.test.entity.BaseStationEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

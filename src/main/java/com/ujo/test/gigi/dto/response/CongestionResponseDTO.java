@@ -1,6 +1,6 @@
 package com.ujo.test.gigi.dto.response;
 
-import com.ujo.test.gigi.entity.StatAndStationEntity;
+import com.ujo.test.entity.StatAndStationEntity;
 import lombok.Getter;
 import lombok.ToString;
 

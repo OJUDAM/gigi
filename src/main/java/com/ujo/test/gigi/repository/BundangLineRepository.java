@@ -1,6 +1,6 @@
 package com.ujo.test.gigi.repository;
 
-import com.ujo.test.gigi.entity.BundangLineEntity;
+import com.ujo.test.entity.BundangLineEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

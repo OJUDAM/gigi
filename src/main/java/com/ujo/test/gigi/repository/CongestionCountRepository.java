@@ -1,6 +1,6 @@
 package com.ujo.test.gigi.repository;
 
-import com.ujo.test.gigi.entity.CongestionCountEntity;
+import com.ujo.test.entity.CongestionCountEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

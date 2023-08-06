@@ -5,7 +5,7 @@ import com.ujo.test.common.exception.ErrorCode;
 import com.ujo.test.common.utils.DateUtils;
 import com.ujo.test.common.utils.StringUtils;
 import com.ujo.test.gigi.dto.request.ArrivalTimeRequestDTO;
-import com.ujo.test.gigi.entity.ArrivalEntity;
+import com.ujo.test.entity.ArrivalEntity;
 import com.ujo.test.gigi.repository.ArrivalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.ujo.test.gigi.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.gigi.dto.response.CongestionResponseDTO;
-import com.ujo.test.gigi.entity.StatAndStationEntity;
+import com.ujo.test.entity.StatAndStationEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,5 @@
-package com.ujo.test.gigi.entity;
+package com.ujo.test.entity;
 
-import com.ujo.test.common.utils.DateUtils;
-import com.ujo.test.gigi.dto.request.ArrivalTimeRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

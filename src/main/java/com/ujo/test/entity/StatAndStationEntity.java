@@ -1,4 +1,4 @@
-package com.ujo.test.gigi.entity;
+package com.ujo.test.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CongestionCountEntity {
+public class StatAndStationEntity extends BaseStationEntity{
+
     private String stationCode;
-    private String stationName;
-    private String subwayLine;
     private String day;
     private String hour;
     private int congestionMin00;
@@ -19,7 +18,11 @@ public class CongestionCountEntity {
     private int congestionMin30;
     private int congestionMin40;
     private int congestionMin50;
-    private int userCountDate;
-    private int userCount;
+    private int upDnLine;
     private int directAt;
+    private String prevStationCode;
+    private String startStationCode;
+    private String endStationCode;
+    private String startDate;
+    private String endDate;
 }

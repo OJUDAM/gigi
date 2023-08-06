@@ -1,6 +1,6 @@
 package com.ujo.test.gigi.repository;
 
-import com.ujo.test.gigi.entity.StatAndStationEntity;
+import com.ujo.test.entity.StatAndStationEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

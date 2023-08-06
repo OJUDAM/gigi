@@ -4,14 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.entity.ArrivalRealTimeEntity;
 import com.ujo.test.speculation.dto.response.ArrivalRealTimeResponseDTO;
-import com.ujo.test.speculation.repository.ArrivalRealTimeRepository;
-import org.json.simple.JSONArray;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class WebSocketHandlerTest {
     @Test

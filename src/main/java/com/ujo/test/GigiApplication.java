@@ -7,7 +7,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 @EnableWebSocket
 @SpringBootApplication
 public class GigiApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(GigiApplication.class, args);
 	}

@@ -1,4 +1,4 @@
-package com.ujo.test.gigi.entity;
+package com.ujo.test.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,9 @@
 package com.ujo.test.gigi.service;
 
 import com.ujo.test.gigi.dto.response.MetaInfoResponseDTO;
-import com.ujo.test.gigi.entity.BaseStationEntity;
-import com.ujo.test.gigi.entity.BundangLineEntity;
-import com.ujo.test.gigi.entity.CongestionCountEntity;
+import com.ujo.test.entity.BaseStationEntity;
+import com.ujo.test.entity.BundangLineEntity;
+import com.ujo.test.entity.CongestionCountEntity;
 import com.ujo.test.gigi.repository.BundangLineRepository;
 import com.ujo.test.gigi.repository.CongestionCountRepository;
 import com.ujo.test.gigi.repository.MetaInfoRepository;

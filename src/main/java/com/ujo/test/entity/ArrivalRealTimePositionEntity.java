@@ -10,19 +10,17 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
-public class ArrivalRealTimeEntity extends BaseStringDateEntity {
+public class ArrivalRealTimePositionEntity extends BaseEntity{
     private String trainNo;
     private String trainName;
     private String arrivalStationCode;
-    private String arrivalMessage;
-    private String targetStationCode;
     private int arrivalCode;
     private int directAt;
     private int upDnLine;
     private String arrivalDate;
 
-    public static ArrivalRealTimeEntity from(Map<String, Object> realTimeMap) {
+    public static ArrivalRealTimePositionEntity from(Map<String, Object> realTimePositionMap) {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(realTimeMap, ArrivalRealTimeEntity.class);
+        return mapper.convertValue(realTimePositionMap, ArrivalRealTimePositionEntity.class);
     }
 }

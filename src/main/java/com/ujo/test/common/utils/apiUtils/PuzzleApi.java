@@ -1,8 +1,8 @@
 package com.ujo.test.common.utils.apiUtils;
 
-import com.ujo.test.batch.entity.RequestStatEntity;
 import com.ujo.test.common.exception.BusinessException;
 import com.ujo.test.common.exception.ErrorCode;
+import com.ujo.test.entity.RequestStatEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

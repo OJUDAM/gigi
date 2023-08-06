@@ -1,6 +1,6 @@
 package com.ujo.test.speculation.mapper;
 
-import com.ujo.test.batch.entity.ArrivalRealTimeMapper;
+import com.ujo.test.common.mapper.ArrivalRealTimeMapper;
 import com.ujo.test.common.utils.apiUtils.SeoulApi;
 import com.ujo.test.entity.ArrivalRealTimeEntity;
 import org.junit.jupiter.api.Assertions;

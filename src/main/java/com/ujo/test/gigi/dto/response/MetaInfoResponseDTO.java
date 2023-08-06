@@ -1,8 +1,8 @@
 package com.ujo.test.gigi.dto.response;
 
-import com.ujo.test.gigi.entity.BaseStationEntity;
-import com.ujo.test.gigi.entity.BundangLineEntity;
-import com.ujo.test.gigi.entity.CongestionCountEntity;
+import com.ujo.test.entity.BaseStationEntity;
+import com.ujo.test.entity.BundangLineEntity;
+import com.ujo.test.entity.CongestionCountEntity;
 import lombok.Getter;
 import lombok.ToString;
 
