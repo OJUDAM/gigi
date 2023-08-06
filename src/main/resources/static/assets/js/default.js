@@ -34,7 +34,8 @@ var webSocket;
 
 function webSocketInit()
 {
-    webSocket = new WebSocket("ws://localhost:8080/websocket");
+    //webSocket = new WebSocket("ws://localhost:8080/websocket");
+    webSocket = new WebSocket("ws://www.gigi.p-e.kr/websocket");
     webSocket.onopen = onOpen;
     webSocket.onclose = onClose;
     webSocket.onmessage = onMessage;
