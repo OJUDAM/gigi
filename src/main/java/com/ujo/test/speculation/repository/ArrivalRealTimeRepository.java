@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface ArrivalRealTimeRepository {
 
@@ -20,5 +22,13 @@ public interface ArrivalRealTimeRepository {
             " , ARRIVAL_STATION_CODE = #{arrivalStationCode}, ARRIVAL_CODE=#{arrivalCode}, CREATED_AT = #{createdAt}")
     int save(ArrivalRealTimeEntity arrivalRealTimeEntity);
 
+    @Select(" SELECT * FROM STATION_ARRIVAL_REALTIME" +
+            " WHERE ARRIVAL_DATE = DATE_FORMAT(NOW(), '%Y%m%d')" +
+            " ORDER BY CREATED_AT" +
+            " LIMIT 7")
+    List<ArrivalRealTimeEntity> findToDay();
 
+    @Select(" SELECT * FROM STATION_ARRIVAL_REALTIME" +
+            " ORDER BY CREATED_AT")
+    List<ArrivalRealTimeEntity> findAll();
 }
