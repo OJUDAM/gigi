@@ -34,8 +34,8 @@ var webSocket;
 
 function webSocketInit()
 {
-    //webSocket = new WebSocket("ws://localhost:8080/websocket");
-    webSocket = new WebSocket("ws://158.180.68.72:8080/websocket");
+    webSocket = new WebSocket("ws://127.0.0.1:8080/websocket");
+    //webSocket = new WebSocket("ws://158.180.68.72:8080/websocket");
     webSocket.onopen = onOpen;
     webSocket.onclose = onClose;
     webSocket.onmessage = onMessage;
