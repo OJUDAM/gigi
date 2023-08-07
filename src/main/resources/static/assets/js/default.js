@@ -44,7 +44,7 @@ function webSocketInit()
 //웹소켓 연결
 function onOpen(event){
  console.log("연결 완료");
- socketMsgSend();
+ //socketMsgSend();
 }
 
 //메시지를 송신할 때 사용
