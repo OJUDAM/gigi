@@ -34,7 +34,7 @@ var webSocket;
 
 function webSocketInit()
 {
-    //webSocket = new WebSocket("ws://127.0.0.1:8080/websocket");
+    //webSocket = new WebSocket("ws://localhost:8080/websocket");
     webSocket = new WebSocket("ws://158.180.68.72:8080/websocket");
     webSocket.onopen = onOpen;
     webSocket.onclose = onClose;
@@ -76,12 +76,17 @@ function onMessage(event){
 
   //ul 하위 태그 초기화
   $('#realTimeTable').empty();
+
+  $('#realTimeTable').append("<th>train-no</th>");
+  $('#realTimeTable').append("<th>train-name</th>");
+  $('#realTimeTable').append("<th>message</th>");
+
   //시간표 새로 생성
   for(var i = 0; i<realTimeJsonArray.length; i++) {
     const realTimeData = realTimeJsonArray[i];
-    $('#realTimeTable').append('<li><h2>'+realTimeData.trainNo+'-'+realTimeData.trainName+'-'+realTimeData.arrivalMessage+'</h2></li>');
-  }
+    $('#realTimeTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.trainName + "</td><td>" + realTimeData.arrivalMessage+ "</td></tr>");
 
+  }
 }
 
 //웹소켓 에러

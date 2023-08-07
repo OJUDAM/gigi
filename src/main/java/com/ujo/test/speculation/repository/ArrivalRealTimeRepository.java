@@ -22,11 +22,12 @@ public interface ArrivalRealTimeRepository {
             " , ARRIVAL_STATION_CODE = #{arrivalStationCode}, ARRIVAL_CODE=#{arrivalCode}, CREATED_AT = #{createdAt}")
     int save(ArrivalRealTimeEntity arrivalRealTimeEntity);
 
-    @Select("  SELECT * FROM STATION_ARRIVAL_REALTIME" +
+    @Select("   SELECT * FROM STATION_ARRIVAL_REALTIME" +
             " WHERE ARRIVAL_DATE = DATE_FORMAT(NOW(), '%Y%m%d')" +
-            "   AND (ARRIVAL_CODE <> 1 OR (TIMEDIFF(UPDATED_AT, CREATED_AT) < 45 AND ARRIVAL_CODE = 1))" +
-            " ORDER BY CREATED_AT" +
-            " LIMIT 7")
+            "   AND (ARRIVAL_CODE = 99 OR ARRIVAL_CODE = 5 OR ARRIVAL_CODE = 4" +
+            "    OR (TIMEDIFF(UPDATED_AT, CREATED_AT) < 45 AND ARRIVAL_CODE = 1) OR (TIMEDIFF(UPDATED_AT, CREATED_AT) < 80 AND ARRIVAL_CODE = 0))" +
+            " ORDER BY TRAIN_NO" +
+            " LIMIT 5")
     List<ArrivalRealTimeEntity> findToDay();
 
     @Select(" SELECT * FROM STATION_ARRIVAL_REALTIME" +

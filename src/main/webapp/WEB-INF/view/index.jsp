@@ -42,21 +42,9 @@
 				<!-- Four -->
 					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
 						<div class="content">
-						    <table>
-						    <th>train-no</th>
-						    <th>train-name</th>
-						    <tr>
-						        <td>6415</td>
-						        <td>고색</td>
-						    </tr>
-						    <tr>
-                                <td>6213</td>
-                                <td>고색 (급행)</td>
-                            </tr>
-						    </table>
 
-							<ul id="realTimeTable" class="actions stacked">
-							</ul>
+							<table id="realTimeTable" class="actions stacked">
+							</table>
 						</div>
 						<div class="image">
 							<img src="images/spotlight03.jpg" alt="" />
