@@ -34,8 +34,8 @@ var webSocket;
 
 function webSocketInit()
 {
-    webSocket = new WebSocket("ws://127.0.0.1:8080/websocket");
-    //webSocket = new WebSocket("ws://158.180.68.72:8080/websocket");
+    //webSocket = new WebSocket("ws://127.0.0.1:8080/websocket");
+    webSocket = new WebSocket("ws://158.180.68.72:8080/websocket");
     webSocket.onopen = onOpen;
     webSocket.onclose = onClose;
     webSocket.onmessage = onMessage;
@@ -44,7 +44,7 @@ function webSocketInit()
 //웹소켓 연결
 function onOpen(event){
  console.log("연결 완료");
- //socketMsgSend();
+ socketMsgSend();
 }
 
 //메시지를 송신할 때 사용
@@ -52,7 +52,6 @@ function socketMsgSend(){
  // 메시지 포맷
  var msg = {
     type : "message",
-    value : "메시지입니다.",
  }
 
  // 세션리스트에 메시지를 송신한다.
@@ -74,7 +73,6 @@ function onClose(event){
 function onMessage(event){
   const receiveData = event.data; // 수신 data
   const realTimeJsonArray = JSON.parse(receiveData).data; //string -> json
-  console.log(realTimeJsonArray);
 
   //ul 하위 태그 초기화
   $('#realTimeTable').empty();

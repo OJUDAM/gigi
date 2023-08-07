@@ -29,13 +29,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("payload : " + payload);
 
-    }
-
-    // connection established
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        list.add(session);
-
         if (!runCheck) {
             TimerTask task = new TimerTask() {
                 @Override
@@ -55,6 +48,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
             Timer timer = new Timer(true);
             timer.scheduleAtFixedRate(task, 0, 4 * 1000);
         }
+    }
+
+    // connection established
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        list.add(session);
     }
 
     // connection closed
