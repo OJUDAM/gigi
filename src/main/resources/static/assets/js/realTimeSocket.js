@@ -4,7 +4,7 @@ var realTimeSocket;
 function realTimeSocketInit()
 {
     //realTimeSocket = new WebSocket("ws://localhost:8080/socket/realTime");
-    ealTimeSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime");
+    realTimeSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime");
     realTimeSocket.onopen = realTimeOnOpen;
     realTimeSocket.onclose = realTimeOnClose;
     realTimeSocket.onmessage = realTimeOnMessage;
