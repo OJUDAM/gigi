@@ -46,9 +46,10 @@
 							<table id="realTimeTable" class="actions stacked">
 							</table>
 						</div>
-						<div class="image">
-							<img src="images/spotlight03.jpg" alt="" />
-						</div>
+						<div class="content">
+						<table id="realTimePositionTable" class="actions stacked">
+                        </table>
+                        </div>
 					</section>
 
 
@@ -110,6 +111,8 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
             <script src="assets/js/chart.js"></script>
+            <script src="assets/js/realTimePositionSocket.js"></script>
+            <script src="assets/js/realTimeSocket.js"></script>
             <script src="assets/js/default.js"></script>
 	</body>
 </html>

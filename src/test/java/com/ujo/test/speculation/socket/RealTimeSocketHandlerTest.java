@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class WebSocketHandlerTest {
+class RealTimeSocketHandlerTest {
     @Test
     void listToJsonArray() throws JsonProcessingException {
         List<ArrivalRealTimeResponseDTO> arrivalList = new ArrayList<>();

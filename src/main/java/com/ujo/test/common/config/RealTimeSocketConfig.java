@@ -1,6 +1,6 @@
 package com.ujo.test.common.config;
 
-import com.ujo.test.speculation.socket.WebSocketHandler;
+import com.ujo.test.speculation.socket.RealTimeSocketHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -10,13 +10,13 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 @Configuration
 
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer {
+public class RealTimeSocketConfig implements WebSocketConfigurer {
 
-    private final WebSocketHandler handler;
+    private final RealTimeSocketHandler handler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(handler, "/websocket").setAllowedOrigins("*")
+        registry.addHandler(handler, "/socket/realTime").setAllowedOrigins("*")
                 .addInterceptors(new HttpSessionHandshakeInterceptor());   // interceptor for adding httpsession into websocket session
 
     }

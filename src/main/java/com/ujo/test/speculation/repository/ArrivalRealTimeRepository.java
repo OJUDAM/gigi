@@ -26,7 +26,7 @@ public interface ArrivalRealTimeRepository {
             " WHERE ARRIVAL_DATE = DATE_FORMAT(NOW(), '%Y%m%d')" +
             "   AND (ARRIVAL_CODE = 99 OR ARRIVAL_CODE = 5 OR ARRIVAL_CODE = 4" +
             "    OR (TIMEDIFF(UPDATED_AT, CREATED_AT) < 45 AND ARRIVAL_CODE = 1) OR (TIMEDIFF(UPDATED_AT, CREATED_AT) < 80 AND ARRIVAL_CODE = 0))" +
-            " ORDER BY TRAIN_NO" +
+            " ORDER BY ARRIVAL_STATION_CODE DESC" +
             " LIMIT 5")
     List<ArrivalRealTimeEntity> findToDay();
 

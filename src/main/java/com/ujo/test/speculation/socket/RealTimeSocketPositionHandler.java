@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ujo.test.speculation.service.RealTimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONArray;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -18,7 +17,7 @@ import java.util.*;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WebSocketHandler extends TextWebSocketHandler {
+public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
 
     private static List<WebSocketSession> list = new ArrayList<>();
     static Boolean runCheck = false;
@@ -37,7 +36,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
                     while (itr.hasNext()) {
                         try {
                             WebSocketSession session = itr.next();
-                            session.sendMessage(new TextMessage(String.valueOf(getData())));
+                            session.sendMessage(new TextMessage(getData(message.getPayload())));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -62,10 +61,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
         list.remove(session);
     }
 
-    private String getData(){
+    private String getData(String stationCode){
         try {
             Hashtable<String, Object> map = new Hashtable<>();
-            map.put("data", realTimeService.getArrivalTimeList());
+            map.put("data", realTimeService.getArrivalTimePositionList());
             return new ObjectMapper().writeValueAsString(map);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
