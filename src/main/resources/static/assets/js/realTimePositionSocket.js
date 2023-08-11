@@ -50,11 +50,12 @@ function realTimePositionOnMessage(event){
   $('#realTimePositionTable').append("<th>train-name</th>");
   $('#realTimePositionTable').append("<th>station</th>");
   $('#realTimePositionTable').append("<th>time</th>");
+  $('#realTimePositionTable').append("<th>remain</th>");
 
   //시간표 새로 생성
   for(var i = 0; i<realTimeJsonArray.length; i++) {
     const realTimeData = realTimeJsonArray[i];
-    $('#realTimePositionTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.arrivalStationCode + "</td><td>" + realTimeData.arrivalCode+ "</td><td>"+realTimeData.createdAt+"</td></tr>");
+    $('#realTimePositionTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.arrivalStationCode + "</td><td>" + realTimeData.arrivalCode+ "</td><td>"+realTimeData.createdAt+"</td><td>"+realTimeData.remainTime+"</td></tr>");
 
   }
 }
