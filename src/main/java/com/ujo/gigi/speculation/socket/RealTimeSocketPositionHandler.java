@@ -28,6 +28,13 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("payload : " + payload);
 
+    }
+
+    // connection established
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        list.add(session);
+
         if (!runCheck) {
             TimerTask task = new TimerTask() {
                 @Override
@@ -36,7 +43,7 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
                     while (itr.hasNext()) {
                         try {
                             WebSocketSession session = itr.next();
-                            session.sendMessage(new TextMessage(getData(message.getPayload())));
+                            session.sendMessage(new TextMessage(getData()));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -49,19 +56,13 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
         }
     }
 
-    // connection established
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        list.add(session);
-    }
-
     // connection closed
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         list.remove(session);
     }
 
-    private String getData(String stationCode){
+    private String getData(){
         try {
             Hashtable<String, Object> map = new Hashtable<>();
             map.put("data", realTimeService.getArrivalTimePositionList());

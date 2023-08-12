@@ -55,11 +55,17 @@ function realTimePositionOnMessage(event){
   //시간표 새로 생성
   for(var i = 0; i<realTimeJsonArray.length; i++) {
     const realTimeData = realTimeJsonArray[i];
-    $('#realTimePositionTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.arrivalStationCode + "</td><td>" + realTimeData.arrivalCode+ "</td><td>"+realTimeData.createdAt+"</td><td>"+realTimeData.remainTime+"</td></tr>");
+    $('#realTimePositionTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.arrivalStationCode + "</td><td>" + realTimeData.arrivalCode+ "</td><td>"+realTimeData.createdAt+"</td><td>"+secondToMin(realTimeData.remainTime)+"</td></tr>");
 
   }
 }
 
+function secondToMin(second){
+    const minutes = Math.floor(second / 60);
+    const seconds = second - minutes * 60;
+
+    return minutes + ":" + seconds;
+}
 //웹소켓 에러
 function realTimePositionOnError(event){
 console.log("realTimePositionSocket 에러가 발생하였습니다.");

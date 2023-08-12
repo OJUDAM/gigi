@@ -21,7 +21,7 @@ public interface ArrivalRealTimePositionRepository {
             " WHERE TRAIN_NO = #{trainNo}" +
             "   AND ARRIVAL_STATION_CODE = #{stationCode}" +
             "   AND ARRIVAL_CODE = #{arrivalCode}" +
-            "   AND ARRIVAL_DATE < DATE_FORMAT(NOW(), '%y%m%d')" +
+            "   AND ARRIVAL_DATE < DATE_FORMAT(NOW(), '%Y%m%d')" +
             " ORDER BY ABS(TIMESTAMPDIFF(SECOND, CONCAT('1994-10-20 ', DATE_FORMAT(CREATED_AT,'%H:%i:%s')), CONCAT('1994-10-20 ',#{arrivalTime})))" +
             " LIMIT 1")
     ArrivalRealTimePositionEntity findNearDate(@Param("trainNo") String trainNo, @Param("stationCode") String StationCode, @Param("arrivalCode") int arrivalCode,@Param("arrivalTime") String arrivalTime);

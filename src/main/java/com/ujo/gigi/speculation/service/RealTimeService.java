@@ -50,8 +50,8 @@ public class RealTimeService {
                         , arrivalRealTimePosition.getArrivalCode()
                         , BundangLine.valueOfName("망포역").code());
 
-                if (arrivalNearTime.getCreatedAt() != null) {
-                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), arrivalNextTime.getCreatedAt());
+                if (arrivalNextTime != null && arrivalNextTime.getCreatedAt() != null) {
+                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), arrivalRealTimePosition.getCreatedAt());
                 }
             }
 
