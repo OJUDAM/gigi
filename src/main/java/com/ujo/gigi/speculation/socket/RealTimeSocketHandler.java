@@ -27,6 +27,12 @@ public class RealTimeSocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         String payload = message.getPayload();
         log.info("payload : " + payload);
+    }
+
+    // connection established
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        list.add(session);
 
         if (!runCheck) {
             TimerTask task = new TimerTask() {
@@ -47,12 +53,6 @@ public class RealTimeSocketHandler extends TextWebSocketHandler {
             Timer timer = new Timer(true);
             timer.scheduleAtFixedRate(task, 0, 4 * 1000);
         }
-    }
-
-    // connection established
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        list.add(session);
     }
 
     // connection closed

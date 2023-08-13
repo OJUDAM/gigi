@@ -13,7 +13,7 @@ function realTimeSocketInit()
 //웹소켓 연결
 function realTimeOnOpen(event){
  console.log("realTimeSocket 연결 완료");
- realTimeSocketMsgSend();
+ //realTimeSocketMsgSend();
 }
 
 //메시지를 송신할 때 사용
