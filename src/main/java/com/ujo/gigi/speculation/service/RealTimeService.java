@@ -51,7 +51,7 @@ public class RealTimeService {
                         , BundangLine.valueOfName("망포역").code());
 
                 if (arrivalNextTime != null && arrivalNextTime.getCreatedAt() != null) {
-                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), arrivalRealTimePosition.getCreatedAt());
+                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), DateUtils.addDate("yyyy-MM-dd HH:mm:ss",0));
                 }
             }
 

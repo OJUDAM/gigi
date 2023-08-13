@@ -8,6 +8,6 @@ class ExtractionServiceTest {
     @Test
     void getSimilarPatternTest() {
 
-        System.out.println(DateUtils.addDate("yyyyMMdd",0));
+        System.out.println(DateUtils.addDate("yyyy-MM-dd HH:mm:ss",0));
     }
 }
