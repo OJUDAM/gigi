@@ -59,6 +59,9 @@ public class CommonApi {
         }
     }
 
+    /**
+     * 응답 내용 파싱
+     * */
     private String parsingBuffer(BufferedReader bufferedReader) throws IOException {
         StringBuilder result = new StringBuilder();
         try {

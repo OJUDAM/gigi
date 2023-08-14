@@ -7,8 +7,10 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
+/**
+ * 분당선 실시간 열차 위치 소켓 설정
+ * */
 @Configuration
-
 @RequiredArgsConstructor
 public class RealTimePositionSocketConfig implements WebSocketConfigurer {
 

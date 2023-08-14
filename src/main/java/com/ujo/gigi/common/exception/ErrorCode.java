@@ -2,6 +2,9 @@ package com.ujo.gigi.common.exception;
 
 import lombok.Getter;
 
+/**
+ * 에러 코드 매핑 Enum
+ * */
 @Getter
 public enum ErrorCode {
 

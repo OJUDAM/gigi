@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 지하철 혼잡도 통계 API 호출 시 응답받은 JSON 데이터 map 으로 변환하는 클래스
+ * */
 @Component
 @Slf4j
 public class StatMapper extends BaseMapper{
@@ -67,7 +70,7 @@ public class StatMapper extends BaseMapper{
             String hour = "";
             String day = "";
 
-            //00 10 20 30 40 50
+            //00 10 20 30 40 50 (10분 단위로 구성)
             for (int i = 0; i < 6; i++) {
                 //시간대별 혼잡도 파싱
                 contents = commonJSONBuilder

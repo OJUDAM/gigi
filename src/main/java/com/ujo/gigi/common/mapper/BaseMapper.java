@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * API 호출 응답 상태에 따른 처리 클래스
+ * */
 @Slf4j
 public class BaseMapper {
 

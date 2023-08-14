@@ -5,6 +5,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ *  분당선 지하철 역 코드, 역명 Enum
+ * */
 public enum BundangLine {
     WANGSIPRI ("K210", "왕십리역"),
     SEOULSUP("K211", "서울숲역"),

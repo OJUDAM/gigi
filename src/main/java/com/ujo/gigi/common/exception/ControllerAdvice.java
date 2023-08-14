@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * 예외 전역 처리
+ * */
 @RestControllerAdvice
 @Slf4j
 public class ControllerAdvice {

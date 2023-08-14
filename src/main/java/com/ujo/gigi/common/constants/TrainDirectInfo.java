@@ -5,6 +5,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Puzzle, 서울 열린 데이터 급행 코드 매핑 Enum
+ * */
 public enum TrainDirectInfo {
     NORMAL(0, "일반"),
     EXPRESS(1, "급행");

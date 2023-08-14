@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 서울 열린 데이터 실시간 도착 정보 API 호출 시 응답 받은 Json 데이터를 ArrivalRealTimeEntity 객체로 변환하는 클래스
+ * */
 @Component
 public class ArrivalRealTimeMapper {
     public List<ArrivalRealTimeEntity> jsonToList(String responseJson) {

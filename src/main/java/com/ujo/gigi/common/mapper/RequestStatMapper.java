@@ -10,10 +10,14 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * API 호출 횟수가 100회로 제한되어있는데 400여개 되는 지하철 역들을 하루에 20개 씩 17, 18, 19 시 각 3번 총 60번 호출하기 위해
+ * 요청 파라미터 테이블에 저장하기 위한 클래스
+ * */
 @Component
 public class RequestStatMapper extends BaseMapper{
 
-    /**ㅇ
+    /**
      * StationEntity 리스트로 받아 17~19 시간 설정 후 RequestStatEntity 리스트로 반환
      * */
     public List<RequestStatEntity> stationsToRequestList(List<StationEntity> stations) {

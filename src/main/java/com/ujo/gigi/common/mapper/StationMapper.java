@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Puzzle API 호출 가능한 지하철 역 응답 받은 JSON 데이터 Map 으로 변환하는 클래스
+ * */
 @Component
 public class StationMapper extends BaseMapper{
 

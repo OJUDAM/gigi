@@ -5,6 +5,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 서울 열린 데이터 지하철 도작 코드 매핑 Enum
+ * */
 public enum SeoulData {
     ENTER(0, "진입"),
     ARRIVE(1, "도착"),

@@ -5,6 +5,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Puzzle, 서울 열린 데이터 상/하행 코드 매핑 Enum
+ * */
 public enum TrainUpDownInfo {
     UP_LINE(0, "상행"),
     DOWN_LINE(1, "하행");
