@@ -52,7 +52,7 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
             };
             runCheck = true;
             Timer timer = new Timer(true);
-            timer.scheduleAtFixedRate(task, 0, 2 * 1000);
+            timer.scheduleAtFixedRate(task, 0, 3 * 1000);
         }
     }
 
