@@ -7,7 +7,9 @@ class ExtractionServiceTest {
 
     @Test
     void getSimilarPatternTest() {
-
+        long target = 15;
+        long source = -5;
+        System.out.println(target - source);
         System.out.println(DateUtils.addDate("yyyy-MM-dd HH:mm:ss",0));
     }
 }

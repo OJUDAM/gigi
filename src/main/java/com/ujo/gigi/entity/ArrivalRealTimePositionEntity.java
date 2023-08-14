@@ -18,6 +18,7 @@ public class ArrivalRealTimePositionEntity extends BaseEntity{
     private int directAt;
     private int upDnLine;
     private String arrivalDate;
+    private long timeDifferent;
 
     public static ArrivalRealTimePositionEntity from(Map<String, Object> realTimePositionMap) {
         ObjectMapper mapper = new ObjectMapper();

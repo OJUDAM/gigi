@@ -38,20 +38,24 @@ public class RealTimeService {
         for (ArrivalRealTimeResponseDTO dto : realtimeList) {
             //열차 위지 정보 세팅
             ArrivalRealTimePositionEntity arrivalRealTimePosition =  arrivalRealTimePositionRepository.findByTrainNoToday(dto.getTrainNo());
+            //현재 도착, 진입한 시간과 가장 가까운 시간대 조회
             ArrivalRealTimePositionEntity arrivalNearTime = arrivalRealTimePositionRepository.findNearDate(arrivalRealTimePosition.getTrainNo()
                     , arrivalRealTimePosition.getArrivalStationCode()
                     , arrivalRealTimePosition.getArrivalCode()
                     , DateUtils.dateToTime(arrivalRealTimePosition.getCreatedAt()));
 
+            //남은 시간 초기화
             long remainTime = 0;
             if (arrivalNearTime != null) {
+                //가장 가까운 시간대의 망포역 도착, 진입 시간 조회
                 ArrivalRealTimePositionEntity arrivalNextTime = arrivalRealTimePositionRepository.findNextStation(arrivalRealTimePosition.getTrainNo()
                         , arrivalNearTime.getArrivalDate()
                         , arrivalRealTimePosition.getArrivalCode()
                         , BundangLine.valueOfName("망포역").code());
 
                 if (arrivalNextTime != null && arrivalNextTime.getCreatedAt() != null) {
-                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), DateUtils.addDate("yyyy-MM-dd HH:mm:ss",0));
+                    //가까운 시간대와 현재 도착 시간대의 차이를 도착 예상 시간에서 빼줌
+                    remainTime = DateUtils.timeDiff(arrivalNextTime.getCreatedAt(), DateUtils.addDate("yyyy-MM-dd HH:mm:ss",0)) - arrivalNearTime.getTimeDifferent();
                 }
             }
 

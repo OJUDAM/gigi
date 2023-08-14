@@ -3,8 +3,8 @@ var realTimePositionSocket;
 var stationCodeMessage;
 function realTimePositionSocketInit()
 {
-    //realTimePositionSocket = new WebSocket("ws://localhost:8080/socket/realTime/position");
-    realTimePositionSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime/position");
+    realTimePositionSocket = new WebSocket("ws://localhost:8080/socket/realTime/position");
+    //realTimePositionSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime/position");
     realTimePositionSocket.onopen = realTimePositionOnOpen;
     realTimePositionSocket.onclose = realTimePositionOnClose;
     realTimePositionSocket.onmessage = realTimePositionOnMessage;
@@ -61,6 +61,10 @@ function realTimePositionOnMessage(event){
 }
 
 function secondToMin(second){
+
+    if(second < 0) {
+        return "도착";
+    }
     const minutes = Math.floor(second / 60);
     const seconds = second - minutes * 60;
 
