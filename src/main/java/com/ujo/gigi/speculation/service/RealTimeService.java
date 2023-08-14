@@ -50,7 +50,7 @@ public class RealTimeService {
                 //가장 가까운 시간대의 망포역 도착, 진입 시간 조회
                 ArrivalRealTimePositionEntity arrivalNextTime = arrivalRealTimePositionRepository.findNextStation(arrivalRealTimePosition.getTrainNo()
                         , arrivalNearTime.getArrivalDate()
-                        , arrivalRealTimePosition.getArrivalCode()
+                        , 1
                         , BundangLine.valueOfName("망포역").code());
 
                 if (arrivalNextTime != null && arrivalNextTime.getCreatedAt() != null) {
