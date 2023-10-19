@@ -8,8 +8,8 @@
 <body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
+                <!--
 
-				<!-- One -->
 					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
 						<div class="content">
 							<h1>지하철 데이터</h1>
@@ -33,24 +33,26 @@
 							<img src="images/banner.jpeg" alt="지하철 이미지" />
 						</div>
 					</section>
+                -->
 
+                <!-- Four -->
+                <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+                    <div class="content">
+
+                        <table id="realTimeTable" class="actions stacked">
+                        </table>
+                    </div>
+                    <div class="content">
+                    <table id="realTimePositionTable" class="actions stacked">
+                    </table>
+                    </div>
+                </section>
                 <!-- Two (Graph) -->
 				<jsp:include page="section/graph.jsp"></jsp:include>
 
 
 
-				<!-- Four -->
-					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
-						<div class="content">
 
-							<table id="realTimeTable" class="actions stacked">
-							</table>
-						</div>
-						<div class="content">
-						<table id="realTimePositionTable" class="actions stacked">
-                        </table>
-                        </div>
-					</section>
 
 
 				<!-- Seven -->

@@ -18,13 +18,13 @@ function sendMessageAfterInit(stationCode){
 //웹소켓 연결
 function realTimePositionOnOpen(event){
     console.log("realTimePositionSocket 연결 완료");
-    //realTimePositionSocketMsgSend();
+    setInterval(() => realTimePositionSocketMsgSend("test"),3000);
 }
-
+//realTimePositionSocket.onopen = () => requestRepeat();
 //메시지를 송신할 때 사용
-function realTimePositionSocketMsgSend(){
+function realTimePositionSocketMsgSend(sendMsg){
  // 세션리스트에 메시지를 송신한다.
- realTimePositionSocket.send("init");
+ realTimePositionSocket.send(sendMsg);
 }
 
 //웹소켓 닫힘
