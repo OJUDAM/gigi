@@ -28,6 +28,16 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("payload : " + payload);
 
+        Iterator<WebSocketSession> itr = list.iterator();
+        while (itr.hasNext()) {
+            try {
+                WebSocketSession webSocketSession = itr.next();
+                webSocketSession.sendMessage(new TextMessage(getData()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     // connection established
@@ -35,25 +45,7 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         list.add(session);
 
-        if (!runCheck) {
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    Iterator<WebSocketSession> itr = list.iterator();
-                    while (itr.hasNext()) {
-                        try {
-                            WebSocketSession session = itr.next();
-                            session.sendMessage(new TextMessage(getData()));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            };
-            runCheck = true;
-            Timer timer = new Timer(true);
-            timer.scheduleAtFixedRate(task, 0, 3 * 1000);
-        }
+        session.sendMessage(new TextMessage(getData()));
     }
 
     // connection closed

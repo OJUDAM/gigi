@@ -17,6 +17,16 @@ public interface ArrivalRealTimePositionRepository {
             " LIMIT 1")
     ArrivalRealTimePositionEntity findByTrainNoToday(@Param("stationCode") String stationCode);
 
+    @Select(" SELECT DISTINCT a.TRAIN_NO FROM" +
+            " (SELECT TRAIN_NO  FROM STATION_ARRIVAL_REALTIME_POSITION" +
+            " WHERE ARRIVAL_STATION_CODE < #{stationCode}" +
+            "   AND ARRIVAL_DATE = DATE_FORMAT(NOW(), '%Y%m%d')" +
+            "   AND UP_DN_LINE = 1" +
+            " ORDER BY CREATED_AT  DESC" +
+            " LIMIT 50) a" +
+            " LIMIT 5")
+    List<ArrivalRealTimePositionEntity> findExpectedTrainNo(@Param("stationCode") String stationCode);
+
     @Select(" SELECT TIMESTAMPDIFF(SECOND, CONCAT('1994-10-20 ', DATE_FORMAT(CREATED_AT,'%H:%i:%s')), CONCAT('1994-10-20 ',#{arrivalTime})) AS TIME_DIFFERENT, TRAIN_NO, ARRIVAL_DATE FROM STATION_ARRIVAL_REALTIME_POSITION pos" +
             " WHERE TRAIN_NO = #{trainNo}" +
             "   AND ARRIVAL_STATION_CODE = #{stationCode}" +

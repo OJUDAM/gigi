@@ -10,9 +10,10 @@ $(function() {
 
     // 웹 소켓 초기화
    	realTimePositionSocketInit();
-   	realTimeSocketInit();
+   	//realTimeSocketInit();
 
 });
+
 
 
 function setArrivalTime(){
