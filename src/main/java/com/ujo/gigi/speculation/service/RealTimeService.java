@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,7 +74,7 @@ public class RealTimeService {
 
             arrivalRealTimeDTOList.add(arrivalDto);
         }
-
+        Collections.sort( arrivalRealTimeDTOList, (o1, o2) -> (int) (o1.getRemainTime() - o2.getRemainTime()));
         return arrivalRealTimeDTOList;
     }
 
