@@ -21,6 +21,7 @@ public interface ArrivalRealTimePositionRepository {
             " (SELECT TRAIN_NO  FROM STATION_ARRIVAL_REALTIME_POSITION" +
             " WHERE ARRIVAL_STATION_CODE < #{stationCode}" +
             "   AND ARRIVAL_DATE = DATE_FORMAT(NOW(), '%Y%m%d')" +
+            "   AND TIMESTAMPDIFF(SECOND, CREATED_AT,NOW()) < 200" +
             "   AND UP_DN_LINE = 1" +
             " ORDER BY CREATED_AT  DESC" +
             " LIMIT 50) a" +
