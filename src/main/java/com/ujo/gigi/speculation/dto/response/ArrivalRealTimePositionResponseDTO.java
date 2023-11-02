@@ -15,6 +15,7 @@ public class ArrivalRealTimePositionResponseDTO {
     private String createdAt;
 
     private long remainTime;
+    private String expectedArrivalTime;
 
     public ArrivalRealTimePositionResponseDTO(ArrivalRealTimePositionEntity arrivalRealTimePosition) {
         this.trainNo = arrivalRealTimePosition.getTrainNo();
@@ -29,5 +30,14 @@ public class ArrivalRealTimePositionResponseDTO {
         this.arrivalCode = SeoulData.valueOfCode(arrivalCode).message();
         this.createdAt = createAt;
         this.remainTime = remainTime;
+    }
+    public ArrivalRealTimePositionResponseDTO(String trainNo, String arrivalStationCode
+            , int arrivalCode, String createAt, long remainTime, String expectedArrivalTime) {
+        this.trainNo = trainNo;
+        this.arrivalStationCode = BundangLine.valueOfCode(arrivalStationCode).koreanName() ;
+        this.arrivalCode = SeoulData.valueOfCode(arrivalCode).message();
+        this.createdAt = createAt;
+        this.remainTime = remainTime;
+        this.expectedArrivalTime = expectedArrivalTime;
     }
 }

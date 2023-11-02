@@ -8,6 +8,10 @@ $(function() {
         setArrivalTime();
     });
 
+    $('#suseo').on("click",function () {
+            stationCodeMessage = "수서역";
+     });
+
     // 웹 소켓 초기화
    	realTimePositionSocketInit();
    	//realTimeSocketInit();

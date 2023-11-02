@@ -41,11 +41,13 @@
 
                         <table id="realTimeTable" class="actions stacked">
                         </table>
+                        <input type="button" id="suseo" value="수서역" />
                     </div>
                     <div class="content">
                     <table id="realTimePositionTable" class="actions stacked">
                     </table>
                     </div>
+
                 </section>
                 <!-- Two (Graph) -->
 				<jsp:include page="section/graph.jsp"></jsp:include>
