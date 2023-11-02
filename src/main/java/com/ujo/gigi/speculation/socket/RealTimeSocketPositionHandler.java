@@ -2,6 +2,7 @@ package com.ujo.gigi.speculation.socket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ujo.gigi.speculation.dto.request.ArrivalRealTimePositionRequestDTO;
 import com.ujo.gigi.speculation.service.RealTimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
     private static List<WebSocketSession> list = new ArrayList<>();
     static Boolean runCheck = false;
     private final RealTimeService realTimeService;
-
+    private final ObjectMapper objectMapper;
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         String payload = message.getPayload();
@@ -32,7 +33,7 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
         while (itr.hasNext()) {
             try {
                 WebSocketSession webSocketSession = itr.next();
-                webSocketSession.sendMessage(new TextMessage(getData()));
+                webSocketSession.sendMessage(new TextMessage(getData(payload)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,8 +45,6 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         list.add(session);
-
-        session.sendMessage(new TextMessage(getData()));
     }
 
     // connection closed
@@ -54,11 +53,11 @@ public class RealTimeSocketPositionHandler extends TextWebSocketHandler {
         list.remove(session);
     }
 
-    private String getData(){
+    private String getData(String realTimePositionMessage){
         try {
             Hashtable<String, Object> map = new Hashtable<>();
-            map.put("data", realTimeService.getArrivalTimePositionList());
-            return new ObjectMapper().writeValueAsString(map);
+            map.put("data", realTimeService.getArrivalTimePositionList(objectMapper.readValue(realTimePositionMessage, ArrivalRealTimePositionRequestDTO.class)));
+            return objectMapper.writeValueAsString(map);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

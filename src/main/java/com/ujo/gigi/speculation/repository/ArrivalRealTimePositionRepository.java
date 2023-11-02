@@ -44,6 +44,7 @@ public interface ArrivalRealTimePositionRepository {
             "   AND ARRIVAL_STATION_CODE = #{stationCode}" +
             " LIMIT 1")
     ArrivalRealTimePositionEntity findNextStation(@Param("trainNo") String trainNo, @Param("arrivalDate") String arrivalDate, @Param("arrivalCode") int arrivalCode, @Param("stationCode") String stationCode);
+
     @Select(" SELECT * FROM STATION_ARRIVAL_REALTIME_POSITION" +
             " ORDER BY CREATED_AT")
     List<ArrivalRealTimePositionEntity> findAll();
