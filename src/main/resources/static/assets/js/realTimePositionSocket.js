@@ -6,8 +6,8 @@ var endStationCode = "K241";
 
 function realTimePositionSocketInit()
 {
-    realTimePositionSocket = new WebSocket("ws://localhost:8080/socket/realTime/position");
-    //realTimePositionSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime/position");
+    //realTimePositionSocket = new WebSocket("ws://localhost:8080/socket/realTime/position");
+    realTimePositionSocket = new WebSocket("ws://158.180.68.72:8080/socket/realTime/position");
     realTimePositionSocket.onopen = realTimePositionOnOpen;
     realTimePositionSocket.onclose = realTimePositionOnClose;
     realTimePositionSocket.onmessage = realTimePositionOnMessage;
