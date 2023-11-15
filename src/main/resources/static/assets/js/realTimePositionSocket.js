@@ -22,7 +22,8 @@ function sendMessageAfterInit(stationCode){
 function realTimePositionOnOpen(event){
     console.log("realTimePositionSocket 연결 완료");
     //3초마다 메시지 보냄
-    setInterval(() => realTimePositionSocketMsgSend(),3000);
+    //setInterval(() => realTimePositionSocketMsgSend(),3000);
+    realTimePositionSocketMsgSend()
 }
 //realTimePositionSocket.onopen = () => requestRepeat();
 //메시지를 송신할 때 사용
@@ -30,8 +31,8 @@ function realTimePositionSocketMsgSend(){
  // 세션리스트에 메시지를 송신한다.
  //json 포맷으로 변경
  const jsonObject = new Object();
- jsonObject.startStationCode = startStationCode;
- jsonObject.endStationCode = endStationCode;
+ jsonObject.startStationCode = $('#startStationCode option:selected').val();
+ jsonObject.endStationCode = $('#endStationCode option:selected').val();
  const stationCodeMessage = JSON.stringify(jsonObject);
 
  realTimePositionSocket.send(stationCodeMessage);
@@ -70,6 +71,9 @@ function realTimePositionOnMessage(event){
     $('#realTimePositionTable').append("<tr><td>" + realTimeData.trainNo + "</td><td>" + realTimeData.arrivalStationCode + "</td><td>" + realTimeData.arrivalCode+ "</td><td>"+secondToMin(realTimeData.remainTime)+"</td><td>"+realTimeData.expectedArrivalTime+"</td></tr>");
 
   }
+
+  //응답오면 다시 요청
+  realTimePositionSocketMsgSend()
 }
 
 function secondToMin(second){

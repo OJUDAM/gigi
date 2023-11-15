@@ -35,6 +35,7 @@ public class RealTimeService {
         //화연에 표시할 역기준 도착 정보에 따른 열차 위치 정보담을 리스트 생성
         List<ArrivalRealTimePositionResponseDTO> arrivalRealTimeDTOList = new ArrayList<>();
 
+
         //화면에 표시할 역 기준 도착 정보 조회
         List<ArrivalRealTimePositionEntity> realtimeList = arrivalRealTimePositionRepository.findExpectedTrainNo(BundangLine.valueOfName("수서역").code());
 
@@ -83,8 +84,17 @@ public class RealTimeService {
         //화연에 표시할 역기준 도착 정보에 따른 열차 위치 정보담을 리스트 생성
         List<ArrivalRealTimePositionResponseDTO> arrivalRealTimeDTOList = new ArrayList<>();
 
+        //죽전행 제외조건
+        int sourceCode = Integer.parseInt(BundangLine.valueOfName("죽전역").code().replace("K", ""));
+        int targetCode = Integer.parseInt(realTimePositionRequestDTO.getEndStationCode().replace("K", ""));
+
         //화면에 표시할 역 기준 도착 정보 조회
-        List<ArrivalRealTimePositionEntity> realtimeList = arrivalRealTimePositionRepository.findExpectedTrainNo(BundangLine.valueOfName("수서역").code());
+        List<ArrivalRealTimePositionEntity> realtimeList;
+        if(sourceCode < targetCode){
+            realtimeList = arrivalRealTimePositionRepository.findExpectedTrainNoWithOutJukjeon(realTimePositionRequestDTO.getStartStationCode());
+        } else{
+            realtimeList = arrivalRealTimePositionRepository.findExpectedTrainNo(realTimePositionRequestDTO.getStartStationCode());
+        }
 
         for (ArrivalRealTimePositionEntity dto : realtimeList) {
             //열차 위지 정보 세팅

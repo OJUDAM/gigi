@@ -37,11 +37,27 @@
 
                 <!-- Four -->
                 <section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
-                    <div class="content">
 
+                    <div class="content">
+                        <div class="field half">
+                            <label for="station">출발역</label>
+                            <select name="startStationCode" id="startStationCode">
+                                <c:forEach var="station" items="${bundangLine}">
+                                    <option value="${station.stationCode}">${station.stationName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="field half">
+                            <label for="station">도착역</label>
+                            <select name="endStationCode" id="endStationCode">
+                                <c:forEach var="station" items="${bundangLine}">
+                                    <option value="${station.stationCode}">${station.stationName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                         <table id="realTimeTable" class="actions stacked">
                         </table>
-                        <input type="button" id="suseo" value="수서역" />
+
                     </div>
                     <div class="content">
                     <table id="realTimePositionTable" class="actions stacked">
